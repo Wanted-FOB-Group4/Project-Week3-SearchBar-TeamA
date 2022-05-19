@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { IResultDataList } from 'types/search'
 import SearchBar from 'components/SearchBar'
@@ -8,6 +8,8 @@ import styles from './SearchPage.module.scss'
 
 const SearchPage = () => {
   const [keyword, setKeyword] = useState('')
+  const [keywordIndex, setKeywordIndex] = useState(-1)
+  const [target, setTarget] = useState<any>()
 
   const resultDataList: IResultDataList[] = [
     { name: "Klatskin's tumor", id: 125 },
@@ -19,6 +21,32 @@ const SearchPage = () => {
     { name: '치은암', id: 449 },
     { name: '기저세포상피종', id: 642 },
   ]
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (resultDataList.length > 0) {
+      switch (e.key) {
+        case 'ArrowDown':
+          setKeywordIndex((prevState) => prevState + 1)
+          if (target.current?.childElementCount === keywordIndex + 1) setKeywordIndex(0)
+          break
+        case 'ArrowUp':
+          setKeywordIndex((prevState) => prevState - 1)
+          if (keywordIndex <= 0) {
+            // resultDataList([])
+            setKeywordIndex(-1)
+          }
+          break
+        case 'Escape':
+          setKeywordIndex(-1)
+          // resultDataList([])
+          break
+      }
+    }
+  }
+
+  useEffect(() => {
+    setKeyword(target?.children[keywordIndex]?.innerText)
+  }, [keywordIndex, target?.children])
 
   return (
     <>
@@ -35,8 +63,13 @@ const SearchPage = () => {
           <br />
           온라인으로 참여하기
         </p>
-        <SearchBar keyword={keyword} setKeyword={setKeyword} />
-        <KeywordRecommends resultDataList={resultDataList} setKeyword={setKeyword} />
+        <SearchBar keyword={keyword} setKeyword={setKeyword} handleKeyDown={handleKeyDown} />
+        <KeywordRecommends
+          resultDataList={resultDataList}
+          setKeyword={setKeyword}
+          keywordIndex={keywordIndex}
+          target={setTarget}
+        />
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>

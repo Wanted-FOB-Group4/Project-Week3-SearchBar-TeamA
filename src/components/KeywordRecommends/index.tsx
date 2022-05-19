@@ -7,20 +7,27 @@ import styles from './KeywordRecommends.module.scss'
 interface IKeywordRecommends {
   resultDataList: IResultDataList[]
   setKeyword: Dispatch<SetStateAction<string>>
+  keywordIndex: number
+  target: any
 }
 
-const KeywordRecommends = ({ resultDataList, setKeyword }: IKeywordRecommends) => {
+const KeywordRecommends = ({ resultDataList, setKeyword, keywordIndex, target }: IKeywordRecommends) => {
   return (
     <div className={styles.keywordListForm}>
       <h5 className={styles.searchKeyword}>추천 검색어</h5>
-      <ul className={styles.list}>
+      <ul className={styles.list} ref={target}>
         {resultDataList.length === 0 ? (
           <div className={styles.noResult}>결과가 없습니다</div>
         ) : (
           resultDataList
             .slice(0, 7)
-            .map((resultData: IResultDataList) => (
-              <KeywordRecommendItem key={resultData.id} setKeyword={setKeyword} resultData={resultData} />
+            .map((resultData: IResultDataList, idx) => (
+              <KeywordRecommendItem
+                key={resultData.id}
+                setKeyword={setKeyword}
+                resultData={resultData}
+                isFocusTrue={keywordIndex === idx}
+              />
             ))
         )}
       </ul>
