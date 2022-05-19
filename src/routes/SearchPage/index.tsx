@@ -5,11 +5,14 @@ import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { searchToggle, SearchWord, setSearchWord } from 'store/slices/searchSlice'
 
 const SearchPage = () => {
-  const [keyword, setKeyword] = useState('')
+  const dispatch = useDispatch()
+  const isOpen = useSelector(searchToggle)
+
   const [keywordIndex, setKeywordIndex] = useState(-1)
-  const [showKeywordForm, setShowKeywordForm] = useState(false)
   const [target, setTarget] = useState<any>()
 
   const resultDataList: IResultDataList[] = [
@@ -46,8 +49,8 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
-    setKeyword(target?.children[keywordIndex]?.innerText)
-  }, [keywordIndex, target?.children])
+    dispatch(setSearchWord({ keyword: target?.children[keywordIndex]?.innerText } as SearchWord))
+  }, [dispatch, keywordIndex, target?.children])
 
   return (
     <>
@@ -64,20 +67,10 @@ const SearchPage = () => {
           <br />
           온라인으로 참여하기
         </h1>
-        <SearchBar
-          keyword={keyword}
-          setKeyword={setKeyword}
-          handleKeyDown={handleKeyDown}
-          setShowKeywordForm={setShowKeywordForm}
-        />
-        <KeywordRecommends
-          resultDataList={resultDataList}
-          setKeyword={setKeyword}
-          keywordIndex={keywordIndex}
-          setTarget={setTarget}
-          showKeywordForm={showKeywordForm}
-          setShowKeywordForm={setShowKeywordForm}
-        />
+        <SearchBar handleKeyDown={handleKeyDown} />
+        {isOpen && (
+          <KeywordRecommends resultDataList={resultDataList} keywordIndex={keywordIndex} setTarget={setTarget} />
+        )}
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>

@@ -1,29 +1,23 @@
-import { Dispatch, SetStateAction } from 'react'
 import cx from 'classnames'
 
 import { IResultDataList } from 'types/search'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
+import { useDispatch } from 'react-redux'
+import { SearchWord, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
 interface SearchKeywordRecommendItemProps {
-  setKeyword: Dispatch<SetStateAction<string>>
   resultData: IResultDataList
   isFocusTrue: boolean
-  showKeywordForm: boolean
-  setShowKeywordForm: Dispatch<SetStateAction<boolean>>
 }
 
-const KeywordRecommendItem = ({
-  setKeyword,
-  resultData,
-  isFocusTrue,
-  showKeywordForm,
-  setShowKeywordForm,
-}: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommendItemProps) => {
+  const dispatch = useDispatch()
+
   const handleKeywordClick = () => {
-    setKeyword(resultData.name)
-    setShowKeywordForm(false)
+    dispatch(setSearchWord({ keyword: resultData.name } as SearchWord))
+    dispatch(setSearchToggle({ isOpen: false } as SearchWord))
   }
 
   return (
