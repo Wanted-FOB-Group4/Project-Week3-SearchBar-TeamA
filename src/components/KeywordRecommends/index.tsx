@@ -4,7 +4,7 @@ import KeywordRecommendItem from 'components/KeywordRecommendItem'
 import styles from './KeywordRecommends.module.scss'
 
 interface IKeywordRecommends {
-  data: IDisease[]
+  data: IDisease[] | undefined
   keywordIndex: number
   setTarget: any
 }

@@ -9,6 +9,7 @@ import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
+import { IDisease } from 'types/search'
 
 const SearchPage = () => {
   const keyword = useSelector(searchWord)
@@ -17,7 +18,7 @@ const SearchPage = () => {
   const [keywordIndex, setKeywordIndex] = useState(-1)
   const [target, setTarget] = useState<any>()
 
-  const { data, isLoading, isError, error }: any = useQuery(
+  const { data, isLoading, isError, error } = useQuery<IDisease[] | undefined, Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {

@@ -5,9 +5,10 @@ import { ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searc
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
+import { IDisease } from 'types/search'
 
 interface SearchKeywordRecommendItemProps {
-  resultData: any
+  resultData: IDisease
   isFocusTrue: boolean
 }
 
