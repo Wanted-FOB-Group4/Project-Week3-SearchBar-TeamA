@@ -7,11 +7,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 
-interface ISearchBar {
-  handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
-}
-
-const SearchBar = ({ handleKeyDown }: ISearchBar) => {
+const SearchBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const keyword = useSelector(searchWord)
@@ -49,7 +45,6 @@ const SearchBar = ({ handleKeyDown }: ISearchBar) => {
         placeholder='질환명을 입력해주세요.'
         value={keyword}
         onChange={handleKeywordChange}
-        onKeyDown={handleKeyDown}
       />
       <button className={styles.button} type='button' onClick={handleKeywordClick}>
         검색
