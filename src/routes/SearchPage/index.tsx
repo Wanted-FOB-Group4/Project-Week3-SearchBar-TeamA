@@ -36,7 +36,7 @@ const SearchPage = () => {
           온라인으로 참여하기
         </p>
         <SearchBar keyword={keyword} setKeyword={setKeyword} />
-        <KeywordRecommends resultDataList={resultDataList} />
+        <KeywordRecommends resultDataList={resultDataList} setKeyword={setKeyword} />
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>
