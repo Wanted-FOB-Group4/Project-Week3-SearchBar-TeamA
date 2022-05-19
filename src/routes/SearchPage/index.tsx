@@ -18,7 +18,7 @@ const SearchPage = () => {
   const [keywordIndex, setKeywordIndex] = useState(-1)
   const [target, setTarget] = useState<any>()
 
-  const { data, isLoading, isError, error } = useQuery<IDisease[] | undefined, Error>(
+  const { data, isLoading, isError, error } = useQuery<IDisease[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
