@@ -1,8 +1,12 @@
+import { useState } from 'react'
+
 import SearchBar from 'components/SearchBar'
 
 import styles from './SearchPage.module.scss'
 
 const SearchPage = () => {
+  const [keyword, setKeyword] = useState('')
+
   return (
     <>
       <header className={styles.head}>
@@ -18,7 +22,7 @@ const SearchPage = () => {
           <br />
           온라인으로 참여하기
         </p>
-        <SearchBar />
+        <SearchBar keyword={keyword} setKeyword={setKeyword} />
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>
