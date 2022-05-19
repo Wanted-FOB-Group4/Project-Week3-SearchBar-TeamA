@@ -17,7 +17,6 @@ const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommen
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // TODO: 라우팅되도록. 예제 사이트 보시면 추천 검색어 클릭시 결과 페이지로 넘어갑니다.
   const handleKeywordClick = () => {
     dispatch(setSearchWord({ keyword: resultData.sickNm } as ISearchState))
     navigate(`/search/${resultData.sickNm}`)
