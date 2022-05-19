@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,7 +12,7 @@ const SearchBar = () => {
   const navigate = useNavigate()
   const keyword = useSelector(searchWord)
 
-  const handleKeywordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate(`/search/${keyword}`)
   }
@@ -21,10 +21,6 @@ const SearchBar = () => {
     const { value } = e.currentTarget
 
     dispatch(setSearchWord({ keyword: value } as ISearchState))
-  }
-
-  const handleKeywordClick = () => {
-    navigate(`/search/${keyword}`)
   }
 
   return (
@@ -39,7 +35,7 @@ const SearchBar = () => {
         value={keyword}
         onChange={handleKeywordChange}
       />
-      <button className={styles.button} type='button' onClick={handleKeywordClick}>
+      <button className={styles.button} type='submit'>
         검색
       </button>
     </form>
