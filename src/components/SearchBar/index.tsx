@@ -1,15 +1,17 @@
-import { MagnifyingGlassIcon } from 'assets/svgs'
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, KeyboardEventHandler, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 
 interface ISearchBar {
   keyword: string
   setKeyword: Dispatch<SetStateAction<string>>
+  handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
 }
 
-const SearchBar = ({ keyword, setKeyword }: ISearchBar) => {
+const SearchBar = ({ keyword, setKeyword, handleKeyDown }: ISearchBar) => {
   const navigate = useNavigate()
 
   const handleKeywordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +35,7 @@ const SearchBar = ({ keyword, setKeyword }: ISearchBar) => {
         placeholder='질환명을 입력해주세요.'
         value={keyword}
         onChange={handleKeywordChange}
+        onKeyDown={handleKeyDown}
       />
       <div className={styles.icon}>
         <MagnifyingGlassIcon />
