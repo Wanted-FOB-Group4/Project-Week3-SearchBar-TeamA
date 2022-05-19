@@ -1,0 +1,39 @@
+@import 'styles/constants/colors';
+
+.listKeyword {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 800px;
+  height: 33px;
+  list-style: none;
+}
+
+.focusKeyword {
+  background: $BACKGROUND;
+}
+
+.keywordBtn {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 470px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  text-align: start;
+  cursor: pointer;
+  background: $WHITE;
+  border: 0;
+  outline: 0;
+}
+
+.icon {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+.keywordName {
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 13px;
+}
