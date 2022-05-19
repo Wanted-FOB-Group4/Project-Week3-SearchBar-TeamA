@@ -1,3 +1,4 @@
+import { MagnifyingGlassIcon } from 'assets/svgs'
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,7 +34,9 @@ const SearchBar = ({ keyword, setKeyword }: ISearchBar) => {
         value={keyword}
         onChange={handleKeywordChange}
       />
-      <div className={styles.icon} />
+      <div className={styles.icon}>
+        <MagnifyingGlassIcon />
+      </div>
       <button className={styles.button} type='button' onClick={handleKeywordClick}>
         검색
       </button>
