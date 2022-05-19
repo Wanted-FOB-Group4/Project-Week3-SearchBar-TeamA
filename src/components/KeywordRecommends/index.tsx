@@ -14,13 +14,17 @@ const KeywordRecommends = ({ resultDataList, keywordIndex, setTarget }: IKeyword
     <div className={styles.keywordListForm}>
       <h5 className={styles.searchKeyword}>추천 검색어</h5>
       <ul className={styles.list} ref={setTarget}>
-        {resultDataList.length === 0 ? (
+        {!resultDataList ? (
           <div className={styles.noResult}>결과가 없습니다</div>
         ) : (
           resultDataList
-            .slice(0, 7)
-            .map((resultData: IResultDataList, idx) => (
-              <KeywordRecommendItem key={resultData.id} resultData={resultData} isFocusTrue={keywordIndex === idx} />
+            ?.slice(0, 7)
+            .map((resultData: any, idx) => (
+              <KeywordRecommendItem
+                key={resultData.sickCd}
+                resultData={resultData}
+                isFocusTrue={keywordIndex === idx}
+              />
             ))
         )}
       </ul>

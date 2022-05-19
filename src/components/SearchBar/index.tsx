@@ -1,11 +1,11 @@
 import { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
 interface ISearchBar {
   handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
