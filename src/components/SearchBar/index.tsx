@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 
-const SearchBar = ({ onKeyPress }: any) => {
+const SearchBar = ({ onKeyPress }: { onKeyPress: React.KeyboardEventHandler<HTMLInputElement> }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const keyword = useSelector(searchWord)

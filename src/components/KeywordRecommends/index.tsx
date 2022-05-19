@@ -10,7 +10,7 @@ import KeywordRecommendItem from 'components/KeywordRecommendItem'
 
 import styles from './KeywordRecommends.module.scss'
 
-const KeywordRecommends = ({ keywordIndex }: any) => {
+const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
   const dispatch = useDispatch()
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
