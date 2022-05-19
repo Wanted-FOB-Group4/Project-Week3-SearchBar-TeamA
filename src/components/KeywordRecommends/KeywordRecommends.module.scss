@@ -1,0 +1,32 @@
+@import 'styles/constants/colors';
+
+.keywordListForm {
+  position: relative;
+  z-index: 10;
+  width: 520px;
+  min-height: 100px;
+  margin-top: 6px;
+  background: $WHITE;
+  border-radius: 20px;
+}
+
+.searchKeyword {
+  margin: 18px 0 9px 20px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: $GRAY;
+  text-align: start;
+}
+
+.list {
+  width: 200px;
+  padding: 0;
+  margin: 0 0 13px 20px;
+}
+
+.noResult {
+  position: absolute;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 12px;
+}
