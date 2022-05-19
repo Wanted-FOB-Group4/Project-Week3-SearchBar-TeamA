@@ -6,7 +6,7 @@ import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchToggle, SearchWord, setSearchWord } from 'store/slices/searchSlice'
+import { searchToggle, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 
 const SearchPage = () => {
   const dispatch = useDispatch()
@@ -49,7 +49,7 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
-    dispatch(setSearchWord({ keyword: target?.children[keywordIndex]?.innerText } as SearchWord))
+    dispatch(setSearchWord({ keyword: target?.children[keywordIndex]?.innerText } as ISearchState))
   }, [dispatch, keywordIndex, target?.children])
 
   return (

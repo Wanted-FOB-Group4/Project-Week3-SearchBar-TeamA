@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchWord, SearchWord, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
+import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
 interface ISearchBar {
   handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
@@ -23,11 +23,11 @@ const SearchBar = ({ handleKeyDown }: ISearchBar) => {
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-    dispatch(setSearchWord({ keyword: value } as SearchWord))
+    dispatch(setSearchWord({ keyword: value } as ISearchState))
     if (value === '') {
-      dispatch(setSearchToggle({ isOpen: false } as SearchWord))
+      dispatch(setSearchToggle({ isOpen: false } as ISearchState))
     } else {
-      dispatch(setSearchToggle({ isOpen: true } as SearchWord))
+      dispatch(setSearchToggle({ isOpen: true } as ISearchState))
     }
   }
 

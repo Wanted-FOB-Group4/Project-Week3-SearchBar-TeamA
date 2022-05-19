@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
 import { useDispatch } from 'react-redux'
-import { SearchWord, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
+import { ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
 interface SearchKeywordRecommendItemProps {
   resultData: IResultDataList
@@ -16,8 +16,8 @@ const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommen
   const dispatch = useDispatch()
 
   const handleKeywordClick = () => {
-    dispatch(setSearchWord({ keyword: resultData.name } as SearchWord))
-    dispatch(setSearchToggle({ isOpen: false } as SearchWord))
+    dispatch(setSearchWord({ keyword: resultData.name } as ISearchState))
+    dispatch(setSearchToggle({ isOpen: false } as ISearchState))
   }
 
   return (
