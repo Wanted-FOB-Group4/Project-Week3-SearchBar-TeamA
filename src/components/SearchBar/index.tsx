@@ -1,19 +1,20 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { searchWord, SearchWord, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
 interface ISearchBar {
-  keyword: string
-  setKeyword: Dispatch<SetStateAction<string>>
   handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
-  setShowKeywordForm: Dispatch<SetStateAction<boolean>>
 }
 
-const SearchBar = ({ keyword, setKeyword, handleKeyDown, setShowKeywordForm }: ISearchBar) => {
+const SearchBar = ({ handleKeyDown }: ISearchBar) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const keyword = useSelector(searchWord)
 
   const handleKeywordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,8 +22,13 @@ const SearchBar = ({ keyword, setKeyword, handleKeyDown, setShowKeywordForm }: I
   }
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.currentTarget.value)
-    if (keyword === '') setShowKeywordForm(false)
+    const { value } = e.currentTarget
+    dispatch(setSearchWord({ keyword: value } as SearchWord))
+    if (value === '') {
+      dispatch(setSearchToggle({ isOpen: false } as SearchWord))
+    } else {
+      dispatch(setSearchToggle({ isOpen: true } as SearchWord))
+    }
   }
 
   const handleKeywordClick = () => {
