@@ -9,9 +9,10 @@ import { IDisease } from 'types/search'
 
 interface SearchKeywordRecommendItemProps {
   resultData: IDisease
+  isFocusTrue: boolean
 }
 
-const KeywordRecommendItem = ({ resultData }: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommendItemProps) => {
   const dispatch = useDispatch()
 
   // TODO: 라우팅되도록. 예제 사이트 보시면 추천 검색어 클릭시 결과 페이지로 넘어갑니다.
@@ -20,7 +21,7 @@ const KeywordRecommendItem = ({ resultData }: SearchKeywordRecommendItemProps) =
   }
 
   return (
-    <li className={cx(styles.listKeyword)} value={resultData.sickNm}>
+    <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocusTrue })} value={resultData.sickNm}>
       <button type='button' className={styles.keywordBtn} onClick={handleKeywordClick}>
         <div className={styles.icon}>
           <MagnifyingGlassIcon className={styles.icon} />

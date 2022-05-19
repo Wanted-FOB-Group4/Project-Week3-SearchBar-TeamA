@@ -3,10 +3,12 @@ import { RootState } from '../../types/search.d'
 
 export interface ISearchState {
   keyword: string | undefined
+  recommendsCount: number
 }
 
 const initialState: ISearchState = {
   keyword: '',
+  recommendsCount: 0,
 }
 
 // slice 안에 들어갈 내용들은 매우 심플하고 직관적이다.
@@ -17,12 +19,16 @@ export const searchSlice = createSlice({
   reducers: {
     setSearchWord(state, action: PayloadAction<ISearchState>) {
       // 업데이트 되는 State 를 return 해준다.
-      return { keyword: action.payload.keyword }
+      return { ...state, keyword: action.payload.keyword }
+    },
+    setRecommendsCount(state, action: PayloadAction<ISearchState>) {
+      return { ...state, recommendsCount: action.payload.recommendsCount }
     },
   },
 })
 
 export const searchWord = (state: RootState) => state.searchSlice.keyword
+export const recommendsCount = (state: RootState) => state.searchSlice.recommendsCount
 
 // 액션과 리듀서를 export 해준다. 이건 그냥 따라하면 된다.
-export const { setSearchWord } = searchSlice.actions
+export const { setSearchWord, setRecommendsCount } = searchSlice.actions

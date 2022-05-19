@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 
-const SearchBar = () => {
+const SearchBar = ({ onKeyPress }: any) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const keyword = useSelector(searchWord)
@@ -19,7 +19,6 @@ const SearchBar = () => {
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-
     dispatch(setSearchWord({ keyword: value } as ISearchState))
   }
 
@@ -29,6 +28,7 @@ const SearchBar = () => {
         <MagnifyingGlassIcon />
       </div>
       <input
+        onKeyDown={onKeyPress}
         className={styles.input}
         type='search'
         placeholder='질환명을 입력해주세요.'
