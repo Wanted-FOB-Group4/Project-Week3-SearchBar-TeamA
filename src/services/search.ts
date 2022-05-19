@@ -18,5 +18,5 @@ export const getDiseaseData = async (keyword: string) => {
 
   if (filtered.length === 0) throw new Error('추천 검색어가 없습니다')
 
-  return filtered
+  return filtered.slice(0, 7)
 }
