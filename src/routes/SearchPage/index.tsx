@@ -9,6 +9,7 @@ import styles from './SearchPage.module.scss'
 const SearchPage = () => {
   const [keyword, setKeyword] = useState('')
   const [keywordIndex, setKeywordIndex] = useState(-1)
+  const [showKeywordForm, setShowKeywordForm] = useState(false)
   const [target, setTarget] = useState<any>()
 
   const resultDataList: IResultDataList[] = [
@@ -51,24 +52,31 @@ const SearchPage = () => {
   return (
     <>
       <header className={styles.head}>
-        <p className={styles.title}>한국임상정보</p>
+        <div className={styles.title}>한국임상정보</div>
         <nav className={styles.navigation}>
           <div className={styles.navigationBtn}>소식받기</div>
           <div className={styles.navigationBtn}>제휴/문의</div>
         </nav>
       </header>
       <section className={styles.section}>
-        <p className={styles.description}>
+        <h1 className={styles.description}>
           국내 모든 임상시험 검색하고
           <br />
           온라인으로 참여하기
-        </p>
-        <SearchBar keyword={keyword} setKeyword={setKeyword} handleKeyDown={handleKeyDown} />
+        </h1>
+        <SearchBar
+          keyword={keyword}
+          setKeyword={setKeyword}
+          handleKeyDown={handleKeyDown}
+          setShowKeywordForm={setShowKeywordForm}
+        />
         <KeywordRecommends
           resultDataList={resultDataList}
           setKeyword={setKeyword}
           keywordIndex={keywordIndex}
-          target={setTarget}
+          setTarget={setTarget}
+          showKeywordForm={showKeywordForm}
+          setShowKeywordForm={setShowKeywordForm}
         />
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>

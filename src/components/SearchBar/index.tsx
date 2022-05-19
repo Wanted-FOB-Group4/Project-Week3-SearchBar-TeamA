@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, KeyboardEventHandler, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { MagnifyingGlassIcon } from 'assets/svgs'
@@ -9,9 +9,10 @@ interface ISearchBar {
   keyword: string
   setKeyword: Dispatch<SetStateAction<string>>
   handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
+  setShowKeywordForm: Dispatch<SetStateAction<boolean>>
 }
 
-const SearchBar = ({ keyword, setKeyword, handleKeyDown }: ISearchBar) => {
+const SearchBar = ({ keyword, setKeyword, handleKeyDown, setShowKeywordForm }: ISearchBar) => {
   const navigate = useNavigate()
 
   const handleKeywordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,6 +22,7 @@ const SearchBar = ({ keyword, setKeyword, handleKeyDown }: ISearchBar) => {
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.currentTarget.value)
+    if (keyword === '') setShowKeywordForm(false)
   }
 
   const handleKeywordClick = () => {
@@ -29,6 +31,9 @@ const SearchBar = ({ keyword, setKeyword, handleKeyDown }: ISearchBar) => {
 
   return (
     <form className={styles.form} onSubmit={handleKeywordSubmit}>
+      <div className={styles.icon}>
+        <MagnifyingGlassIcon />
+      </div>
       <input
         className={styles.input}
         type='search'
@@ -37,9 +42,6 @@ const SearchBar = ({ keyword, setKeyword, handleKeyDown }: ISearchBar) => {
         onChange={handleKeywordChange}
         onKeyDown={handleKeyDown}
       />
-      <div className={styles.icon}>
-        <MagnifyingGlassIcon />
-      </div>
       <button className={styles.button} type='button' onClick={handleKeywordClick}>
         검색
       </button>

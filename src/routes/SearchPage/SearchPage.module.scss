@@ -4,26 +4,31 @@
 .head {
   position: relative;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   width: 100vw;
   height: 45px;
+  padding: 0 18vw;
   background: $WHITE;
 }
 
 .title {
-  margin-left: 370px;
+  width: 100px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
 
 .navigation {
-  position: absolute;
-  right: 0;
   display: flex;
   flex-direction: row;
-  margin-right: 42px;
+}
+
+.navigationBtn {
+  width: 70px;
+  margin-right: 50px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 13px;
 }
 
 .section {
@@ -44,16 +49,6 @@
   line-height: 42px;
   text-align: center;
   letter-spacing: 0.1px;
-}
-
-.navigationBtn {
-  margin-right: 50px;
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  font-size: 13px;
-
-  &:last-child {
-    margin-right: 340px;
-  }
 }
 
 .backgroundBottom {

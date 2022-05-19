@@ -1,28 +1,35 @@
 @import 'styles/constants/colors';
 
 .form {
-  position: relative;
   display: flex;
   flex-direction: rows;
   align-items: center;
+  width: 520px;
+  height: 50px;
   margin-top: 20px;
+  background: $WHITE;
+  border-radius: 100px;
 }
 
 .icon {
-  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-left: 24px;
-  font-size: 15px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .input {
   width: 520px;
   height: 50px;
-  padding-left: 52px;
+  padding-left: 22px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 14px;
   background: $WHITE;
-  border: none;
-  border-radius: 100px;
 
   &:focus {
     outline: none;
@@ -31,7 +38,6 @@
 }
 
 .button {
-  position: absolute;
   right: 0;
   width: 76px;
   height: 50px;
