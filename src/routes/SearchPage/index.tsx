@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
-import { QueryClientProvider, QueryClient } from 'react-query'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { searchToggle, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { IResultDataList } from 'types/search'
 import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { searchToggle, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 
 const SearchPage = () => {
-  const queryClient = new QueryClient()
   const dispatch = useDispatch()
   const isOpen = useSelector(searchToggle)
 
@@ -69,12 +67,10 @@ const SearchPage = () => {
           <br />
           온라인으로 참여하기
         </h1>
-        <QueryClientProvider client={queryClient}>
-          <SearchBar handleKeyDown={handleKeyDown} />
-          {isOpen && (
-            <KeywordRecommends resultDataList={resultDataList} keywordIndex={keywordIndex} setTarget={setTarget} />
-          )}
-        </QueryClientProvider>
+        <SearchBar handleKeyDown={handleKeyDown} />
+        {isOpen && (
+          <KeywordRecommends resultDataList={resultDataList} keywordIndex={keywordIndex} setTarget={setTarget} />
+        )}
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>
