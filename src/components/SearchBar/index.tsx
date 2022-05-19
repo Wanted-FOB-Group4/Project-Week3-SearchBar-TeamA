@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
+import { searchWord, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
@@ -21,13 +21,6 @@ const SearchBar = () => {
     const { value } = e.currentTarget
 
     dispatch(setSearchWord({ keyword: value } as ISearchState))
-
-    if (value === '') {
-      dispatch(setSearchToggle({ isOpen: false } as ISearchState))
-      return
-    }
-
-    dispatch(setSearchToggle({ isOpen: true } as ISearchState))
   }
 
   const handleKeywordClick = () => {

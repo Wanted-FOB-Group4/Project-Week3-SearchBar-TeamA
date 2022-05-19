@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../types/search.d'
 
 export interface ISearchState {
-  isOpen: boolean
   keyword: string | undefined
 }
 
 const initialState: ISearchState = {
-  isOpen: false,
   keyword: '',
 }
 
@@ -19,17 +17,12 @@ export const searchSlice = createSlice({
   reducers: {
     setSearchWord(state, action: PayloadAction<ISearchState>) {
       // 업데이트 되는 State 를 return 해준다.
-      return { isOpen: state.isOpen, keyword: action.payload.keyword }
-    },
-    setSearchToggle(state, action: PayloadAction<ISearchState>) {
-      // 업데이트 되는 State 를 return 해준다.
-      return { isOpen: action.payload.isOpen, keyword: state.keyword }
+      return { keyword: action.payload.keyword }
     },
   },
 })
 
 export const searchWord = (state: RootState) => state.searchSlice.keyword
-export const searchToggle = (state: RootState) => state.searchSlice.isOpen
 
 // 액션과 리듀서를 export 해준다. 이건 그냥 따라하면 된다.
-export const { setSearchWord, setSearchToggle } = searchSlice.actions
+export const { setSearchWord } = searchSlice.actions
