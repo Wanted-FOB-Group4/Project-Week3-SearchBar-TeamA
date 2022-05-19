@@ -1,9 +1,6 @@
 import axios from 'axios'
 
-export interface IDisease {
-  sickCd: string
-  sickNm: string
-}
+import { IDisease } from 'types/search'
 
 // 단순 문자열 체크 버전
 // TODO: 퍼지 문자열 검색 로직 추가
