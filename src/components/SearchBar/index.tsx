@@ -23,12 +23,15 @@ const SearchBar = ({ handleKeyDown }: ISearchBar) => {
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
+
     dispatch(setSearchWord({ keyword: value } as ISearchState))
+
     if (value === '') {
       dispatch(setSearchToggle({ isOpen: false } as ISearchState))
-    } else {
-      dispatch(setSearchToggle({ isOpen: true } as ISearchState))
+      return
     }
+
+    dispatch(setSearchToggle({ isOpen: true } as ISearchState))
   }
 
   const handleKeywordClick = () => {
