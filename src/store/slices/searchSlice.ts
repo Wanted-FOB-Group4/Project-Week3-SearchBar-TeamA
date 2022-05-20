@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../types/search.d'
 
 export interface ISearchState {
-  isOpen: boolean
   keyword: string | undefined
+  recommendsCount: number
 }
 
 const initialState: ISearchState = {
-  isOpen: false,
   keyword: '',
+  recommendsCount: 0,
 }
 
 // slice 안에 들어갈 내용들은 매우 심플하고 직관적이다.
@@ -19,17 +19,16 @@ export const searchSlice = createSlice({
   reducers: {
     setSearchWord(state, action: PayloadAction<ISearchState>) {
       // 업데이트 되는 State 를 return 해준다.
-      return { isOpen: state.isOpen, keyword: action.payload.keyword }
+      return { ...state, keyword: action.payload.keyword }
     },
-    setSearchToggle(state, action: PayloadAction<ISearchState>) {
-      // 업데이트 되는 State 를 return 해준다.
-      return { isOpen: action.payload.isOpen, keyword: state.keyword }
+    setRecommendsCount(state, action: PayloadAction<ISearchState>) {
+      return { ...state, recommendsCount: action.payload.recommendsCount }
     },
   },
 })
 
 export const searchWord = (state: RootState) => state.searchSlice.keyword
-export const searchToggle = (state: RootState) => state.searchSlice.isOpen
+export const recommendsCount = (state: RootState) => state.searchSlice.recommendsCount
 
 // 액션과 리듀서를 export 해준다. 이건 그냥 따라하면 된다.
-export const { setSearchWord, setSearchToggle } = searchSlice.actions
+export const { setSearchWord, setRecommendsCount } = searchSlice.actions
