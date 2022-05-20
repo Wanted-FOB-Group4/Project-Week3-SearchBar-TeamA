@@ -40,7 +40,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     return (
       <ul>
         {data?.map((resultData: IDisease, index) => (
-          <KeywordRecommendItem key={resultData.sickCd} resultData={resultData} isFocusTrue={keywordIndex === index} />
+          <KeywordRecommendItem key={resultData.sickCd} resultData={resultData} isFocused={keywordIndex === index} />
         ))}
       </ul>
     )

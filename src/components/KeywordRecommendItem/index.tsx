@@ -10,9 +10,10 @@ import { IDisease } from 'types/search'
 
 interface SearchKeywordRecommendItemProps {
   resultData: IDisease
+  isFocused: boolean
 }
 
-const KeywordRecommendItem = ({ resultData }: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ resultData, isFocused }: SearchKeywordRecommendItemProps) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -22,7 +23,7 @@ const KeywordRecommendItem = ({ resultData }: SearchKeywordRecommendItemProps) =
   }
 
   return (
-    <li className={cx(styles.listKeyword)} value={resultData.sickNm}>
+    <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocused })} value={resultData.sickNm}>
       <button type='button' className={styles.keywordBtn} onClick={handleKeywordClick}>
         <div className={styles.icon}>
           <MagnifyingGlassIcon className={styles.icon} />
