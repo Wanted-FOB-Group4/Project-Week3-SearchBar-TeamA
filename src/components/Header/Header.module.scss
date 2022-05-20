@@ -1,0 +1,38 @@
+.header {
+  position: position;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 11px 0;
+
+  svg {
+    width: 126px;
+    height: 24px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navBtn {
+  padding: 8px 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

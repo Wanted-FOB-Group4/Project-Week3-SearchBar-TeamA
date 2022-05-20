@@ -9,6 +9,9 @@
   margin-top: 6px;
   background: $WHITE;
   border-radius: 20px;
+  @media screen and (max-width: 750px) {
+    width: 70vw;
+  }
 }
 
 .searchKeyword {
