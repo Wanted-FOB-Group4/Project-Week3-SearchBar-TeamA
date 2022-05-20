@@ -2,7 +2,7 @@ import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
-import SearchPageBanner from 'components/SearchPageBanner'
+import Banner from 'components/Banner'
 
 const SearchPage = () => {
   // const [keywordIndex, setKeywordIndex] = useState(-1)
@@ -48,7 +48,7 @@ const SearchPage = () => {
       </h1>
       <SearchBar />
       <KeywordRecommends />
-      <SearchPageBanner />
+      <Banner />
     </section>
   )
 }
