@@ -5,10 +5,12 @@
   // TODO: _levels.scss에서 관리
   z-index: 10;
   width: 520px;
+  min-width: 330px;
   padding: 10px 20px;
   margin-top: 6px;
   background: $WHITE;
   border-radius: 20px;
+
   @media screen and (max-width: 750px) {
     width: 70vw;
   }

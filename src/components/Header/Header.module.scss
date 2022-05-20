@@ -6,7 +6,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 14vw;
+  @media screen and (max-width: 1040px) {
+    padding: 0 20px;
+  }
 }
 
 .logo {

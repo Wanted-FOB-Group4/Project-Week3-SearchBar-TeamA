@@ -17,7 +17,7 @@
   flex-direction: column;
   width: 340px;
   margin: 30px 0;
-  margin-right: 20px;
+  margin-right: 80px;
   color: $WHITE;
 }
 
@@ -36,5 +36,17 @@
   svg {
     width: 142px;
     height: 115px;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .bannerTextBox {
+    width: 180px;
+    margin-right: 20px;
+    line-height: 20px;
+  }
+
+  .bannerImageBox {
+    margin-bottom: -62px;
   }
 }
