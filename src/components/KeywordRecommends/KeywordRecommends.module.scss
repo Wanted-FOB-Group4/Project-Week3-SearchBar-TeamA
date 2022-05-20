@@ -1,14 +1,20 @@
-@import 'styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/constants/colors';
+//TODO: import => use로 다 바꾸기
 
 .keywordListForm {
   position: relative;
-  // TODO: _levels.scss에서 관리
-  z-index: 10;
+  z-index: levels.$KEYWORDFORM;
   width: 520px;
-  // min-height: 100px;
+  min-width: 330px;
+  padding: 10px 20px;
   margin-top: 6px;
-  background: $WHITE;
+  background: colors.$WHITE;
   border-radius: 20px;
+
+  @media screen and (max-width: 750px) {
+    width: 70vw;
+  }
 }
 
 .searchKeyword {
@@ -16,7 +22,7 @@
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: $GRAY;
+  color: colors.$GRAY;
   text-align: start;
 }
 
@@ -27,7 +33,6 @@
 }
 
 .noResult {
-  position: absolute;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 12px;
 }
