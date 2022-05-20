@@ -48,8 +48,8 @@ const SearchPage = () => {
         <br />
         온라인으로 참여하기
       </h1>
-      <SearchBar />
-      <KeywordRecommends />
+      <SearchBar onKeyPress={handleKeyPress} />
+      <KeywordRecommends keywordIndex={keywordIndex} />
       <Banner />
     </section>
   )
