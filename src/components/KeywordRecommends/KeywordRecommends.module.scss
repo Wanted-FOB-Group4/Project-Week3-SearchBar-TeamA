@@ -5,7 +5,7 @@
   // TODO: _levels.scss에서 관리
   z-index: 10;
   width: 520px;
-  // min-height: 100px;
+  padding: 10px 20px;
   margin-top: 6px;
   background: $WHITE;
   border-radius: 20px;
@@ -27,7 +27,6 @@
 }
 
 .noResult {
-  position: absolute;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 12px;
 }
