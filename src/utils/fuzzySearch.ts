@@ -46,5 +46,5 @@ export function createFuzzyMatcher(input: string) {
     .map(ch2pattern)
     .map((pattern) => `(${pattern})`)
     .join('.*?')
-  return new RegExp(patterns)
+  return new RegExp(patterns, 'i')
 }
