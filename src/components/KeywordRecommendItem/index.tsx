@@ -10,14 +10,14 @@ import { IDisease } from 'types/search'
 
 interface SearchKeywordRecommendItemProps {
   resultData: IDisease
-  isFocusTrue: boolean
+  isFocused: boolean
 }
 
-const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ resultData, isFocused }: SearchKeywordRecommendItemProps) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const markedKeywordRegex = /(#[A-Za-z0-9가-힣]{1,100}#)/gi
+  
+   const markedKeywordRegex = /(#[A-Za-z0-9가-힣]{1,100}#)/gi
   const recommendData = resultData.sickNm.split(markedKeywordRegex)
 
   const handleKeywordClick = () => {
@@ -34,7 +34,7 @@ const KeywordRecommendItem = ({ resultData, isFocusTrue }: SearchKeywordRecommen
   }
 
   return (
-    <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocusTrue })} value={resultData.sickNm}>
+    <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocused })} value={resultData.sickNm}>
       <button type='button' className={styles.keywordBtn} onClick={handleKeywordClick}>
         <div className={styles.icon}>
           <MagnifyingGlassIcon className={styles.icon} />
