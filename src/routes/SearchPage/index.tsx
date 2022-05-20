@@ -1,56 +1,42 @@
-import { useEffect, useState } from 'react'
-
-import { IResultDataList } from 'types/search'
 import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { searchToggle, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 
 const SearchPage = () => {
-  const dispatch = useDispatch()
-  const isOpen = useSelector(searchToggle)
+  // const [keywordIndex, setKeywordIndex] = useState(-1)
+  // const [target, setTarget] = useState<any>()
 
-  const [keywordIndex, setKeywordIndex] = useState(-1)
-  const [target, setTarget] = useState<any>()
+  // TODO: handleKeyDown 함수 위치 조정 및 data 의존성 제거
+  // const handleKeyDown = (e: KeyboardEvent) => {
+  //   if (data) {
+  //     switch (e.key) {
+  //       case 'ArrowDown':
+  //         setKeywordIndex((prevState) => prevState + 1)
+  //         if (target.current?.childElementCount === keywordIndex + 1) setKeywordIndex(0)
+  //         break
+  //       case 'ArrowUp':
+  //         setKeywordIndex((prevState) => prevState - 1)
+  //         if (keywordIndex <= 0) {
+  //           // resultDataList([])
+  //           setKeywordIndex(-1)
+  //         }
+  //         break
+  //       case 'Escape':
+  //         setKeywordIndex(-1)
+  //         // resultDataList([])
+  //         break
+  //     }
+  //   }
+  // }
 
-  const resultDataList: IResultDataList[] = [
-    { name: "Klatskin's tumor", id: 125 },
-    { name: '간세포암', id: 133 },
-    { name: '갑상선암종', id: 187 },
-    { name: '고환암', id: 335 },
-    { name: '뼈암', id: 375 },
-    { name: '구강암', id: 445 },
-    { name: '치은암', id: 449 },
-    { name: '기저세포상피종', id: 642 },
-  ]
+  // memo: 강의 코드리뷰에서 나왔던 스타일로 리팩토링 했습니다.
+  // TODO: 스타일 작업 필요
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (resultDataList.length > 0) {
-      switch (e.key) {
-        case 'ArrowDown':
-          setKeywordIndex((prevState) => prevState + 1)
-          if (target.current?.childElementCount === keywordIndex + 1) setKeywordIndex(0)
-          break
-        case 'ArrowUp':
-          setKeywordIndex((prevState) => prevState - 1)
-          if (keywordIndex <= 0) {
-            // resultDataList([])
-            setKeywordIndex(-1)
-          }
-          break
-        case 'Escape':
-          setKeywordIndex(-1)
-          // resultDataList([])
-          break
-      }
-    }
-  }
-
-  useEffect(() => {
-    dispatch(setSearchWord({ keyword: target?.children[keywordIndex]?.innerText } as ISearchState))
-  }, [dispatch, keywordIndex, target?.children])
+  // memo: 아래 코드가 data의 status를 변경시킵니다.
+  // useEffect(() => {
+  //   dispatch(setSearchWord({ keyword: target?.children[keywordIndex]?.innerText } as ISearchState))
+  // }, [dispatch, keywordIndex, target?.children])
 
   return (
     <>
@@ -67,10 +53,8 @@ const SearchPage = () => {
           <br />
           온라인으로 참여하기
         </h1>
-        <SearchBar handleKeyDown={handleKeyDown} />
-        {isOpen && (
-          <KeywordRecommends resultDataList={resultDataList} keywordIndex={keywordIndex} setTarget={setTarget} />
-        )}
+        <SearchBar />
+        <KeywordRecommends />
         <div className={styles.backgroundBottom}>
           <div className={styles.notification}>
             <p className={styles.notificationTxt}>새로운 임상시험이 등록되면 문자로 알려드려요</p>

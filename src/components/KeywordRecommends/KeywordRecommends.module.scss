@@ -2,9 +2,10 @@
 
 .keywordListForm {
   position: relative;
+  // TODO: _levels.scss에서 관리
   z-index: 10;
   width: 520px;
-  min-height: 100px;
+  // min-height: 100px;
   margin-top: 6px;
   background: $WHITE;
   border-radius: 20px;

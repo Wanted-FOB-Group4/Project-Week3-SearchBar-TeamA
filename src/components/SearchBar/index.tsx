@@ -1,17 +1,13 @@
 import { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { searchWord, ISearchState, setSearchToggle, setSearchWord } from 'store/slices/searchSlice'
 
-interface ISearchBar {
-  handleKeyDown: any // KeyboardEventHandler<HTMLInputElement> | undefined
-}
-
-const SearchBar = ({ handleKeyDown }: ISearchBar) => {
+const SearchBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const keyword = useSelector(searchWord)
@@ -23,12 +19,15 @@ const SearchBar = ({ handleKeyDown }: ISearchBar) => {
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
+
     dispatch(setSearchWord({ keyword: value } as ISearchState))
+
     if (value === '') {
       dispatch(setSearchToggle({ isOpen: false } as ISearchState))
-    } else {
-      dispatch(setSearchToggle({ isOpen: true } as ISearchState))
+      return
     }
+
+    dispatch(setSearchToggle({ isOpen: true } as ISearchState))
   }
 
   const handleKeywordClick = () => {
@@ -46,7 +45,6 @@ const SearchBar = ({ handleKeyDown }: ISearchBar) => {
         placeholder='질환명을 입력해주세요.'
         value={keyword}
         onChange={handleKeywordChange}
-        onKeyDown={handleKeyDown}
       />
       <button className={styles.button} type='button' onClick={handleKeywordClick}>
         검색

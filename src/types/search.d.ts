@@ -1,6 +1,6 @@
-export interface IResultDataList {
-  name: string
-  id: number
+export interface IDisease {
+  sickCd: string
+  sickNm: string
 }
 
 export type RootState = ReturnType<typeof store.getState>
