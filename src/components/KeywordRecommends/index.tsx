@@ -17,7 +17,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
 
-  const { data, isLoading, isError, error } = useQuery<IDisease[], Error>(
+  const { data, isLoading } = useQuery<IDisease[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
@@ -36,14 +36,9 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     if (isLoading) {
       return <div className={styles.loading}>Loading...</div>
     }
-
-    if (isError) {
-      return <div className={styles.error}>{error.message}</div>
+    if (data && keyword && fuzzyData.length === 0) {
+      return <div className={styles.nothing}>추천 검색어가 없습니다</div>
     }
-
-    // if (data && keyword && fuzzyData.length === 0) {
-    //   return <div>추천 검색어가 없습니다</div>
-    // }
 
     return (
       <ul>
@@ -57,7 +52,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
         ))}
       </ul>
     )
-  }, [fuzzyData, error, isError, isLoading, keywordIndex, keyword])
+  }, [isLoading, data, keyword, fuzzyData, keywordIndex])
 
   return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
 }
