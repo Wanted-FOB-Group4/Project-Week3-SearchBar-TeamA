@@ -10,9 +10,9 @@ import { IDisease, IFuzzyDisease } from 'types/search'
 import { useQueryDebounce } from 'hooks'
 
 import KeywordRecommendItem from 'components/KeywordRecommendItem'
-import styles from './KeywordRecommends.module.scss'
+import styles from './KeywordRecommendList.module.scss'
 
-const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
+const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
   const dispatch = useDispatch()
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
@@ -56,7 +56,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     )
   }, [isLoading, data, keyword, fuzzyData, keywordIndex])
 
-  return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
+  return <div className={cx(styles.keywordListForm, { [styles.active]: fuzzyData.length !== 0 })}>{Recommends}</div>
 }
 
-export default KeywordRecommends
+export default KeywordRecommendList

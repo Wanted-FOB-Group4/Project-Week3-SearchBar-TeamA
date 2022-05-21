@@ -21,7 +21,13 @@ const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
   const count = useSelector(recommendsCount)
 
   const handleKeyUp = (e: { key: string }) => {
-    if (e.key === 'Process') {
+    if (
+      e.key !== 'Backspace' &&
+      e.key !== 'ArrowDown' &&
+      e.key !== 'ArrowUp' &&
+      e.key !== 'Escape' &&
+      e.key !== 'Enter'
+    ) {
       setKeywordIndex(-1)
       dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
       dispatch(setSearchInputValue({ searchInputValue: inputValue } as ISearchInputState))
@@ -67,6 +73,7 @@ const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
   const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate(`/search/${inputValue}`)
+    dispatch(setSearchWord({ keyword: '' } as ISearchState))
   }
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
