@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { setSearchWord, ISearchState } from 'store/slices/searchSlice'
+import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
 import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
@@ -7,7 +10,13 @@ import styles from './SearchPage.module.scss'
 import Banner from 'components/Banner'
 
 const SearchPage = () => {
+  const dispatch = useDispatch()
   const [keywordIndex, setKeywordIndex] = useState(-1)
+
+  useEffect(() => {
+    dispatch(setSearchInputValue({ searchInputValue: '' } as ISearchInputState))
+    dispatch(setSearchWord({ keyword: '' } as ISearchState))
+  }, [dispatch])
 
   return (
     <section className={styles.section}>
