@@ -4,13 +4,16 @@
 .keywordListForm {
   position: relative;
   z-index: levels.$KEYWORDFORM;
+  display: none;
   width: 520px;
   min-width: 330px;
   margin-top: 6px;
   background: colors.$WHITE;
   border-radius: 20px;
 
+  // TODO: active 검사 시간 동안 요소가 보이는 문제
   &.active {
+    display: block;
     padding: 10px 20px;
   }
 

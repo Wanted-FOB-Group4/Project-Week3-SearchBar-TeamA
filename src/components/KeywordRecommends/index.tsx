@@ -37,6 +37,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     if (isLoading) {
       return <div className={styles.loading}>Loading...</div>
     }
+
     if (data && keyword && fuzzyData.length === 0) {
       return <div className={styles.nothing}>추천 검색어가 없습니다</div>
     }
