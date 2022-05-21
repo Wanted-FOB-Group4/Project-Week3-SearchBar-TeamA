@@ -2,24 +2,24 @@ import { ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { searchWord, ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
+import { ISearchInputState, searchInput, setSearchInputValue } from 'store/slices/searchInputSlice'
 
 const SearchBar = ({ onKeyPress }: { onKeyPress: React.KeyboardEventHandler<HTMLInputElement> }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const keyword = useSelector(searchWord)
+  const inputValue = useSelector(searchInput)
 
   const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate(`/search/${keyword}`)
+    navigate(`/search/${inputValue}`)
   }
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-    dispatch(setSearchWord({ keyword: value } as ISearchState))
+    dispatch(setSearchInputValue({ searchInputValue: value } as ISearchInputState))
   }
 
   return (
@@ -28,11 +28,11 @@ const SearchBar = ({ onKeyPress }: { onKeyPress: React.KeyboardEventHandler<HTML
         <MagnifyingGlassIcon />
       </div>
       <input
-        onKeyDown={onKeyPress}
+        onKeyUp={onKeyPress}
         className={styles.input}
         type='search'
         placeholder='질환명을 입력해주세요.'
-        value={keyword}
+        value={inputValue}
         onChange={handleKeywordChange}
       />
       <button className={styles.button} type='submit'>

@@ -1,19 +1,25 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { searchWord, recommendsCount } from 'store/slices/searchSlice'
+import { searchWord, recommendsCount, setSearchWord, ISearchState } from 'store/slices/searchSlice'
 import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
 import Banner from 'components/Banner'
+import { searchInput } from 'store/slices/searchInputSlice'
 
 const SearchPage = () => {
+  const dispatch = useDispatch()
+  const inputValue = useSelector(searchInput)
   const keyword = useSelector(searchWord)
   const count = useSelector(recommendsCount)
   const [keywordIndex, setKeywordIndex] = useState(-1)
 
   const handleKeyPress = (e: { key: string }) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Escape') {
+      dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
+    }
     if (keyword !== '') {
       switch (e.key) {
         case 'ArrowDown':

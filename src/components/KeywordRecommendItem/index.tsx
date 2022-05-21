@@ -2,12 +2,12 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
 
-import { ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
 import { IFuzzyDisease } from 'types/search'
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
+import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
@@ -39,7 +39,7 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
   })
 
   const handleKeywordClick = () => {
-    dispatch(setSearchWord({ keyword: keywordItem.sickNm } as ISearchState))
+    dispatch(setSearchInputValue({ searchInputValue: keywordItem.sickNm } as ISearchInputState))
     navigate(`/search/${keywordItem.sickNm}`)
   }
 

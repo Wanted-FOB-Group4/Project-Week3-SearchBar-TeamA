@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
+import cx from 'classnames'
 
 import { applyFuzzyMatch } from 'utils/fuzzySearch'
 import { getDiseaseData } from 'services/search'
@@ -33,16 +34,16 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
 
   const Recommends = useMemo(() => {
     if (isLoading) {
-      return <div className={styles.list}>Loading...</div>
+      return <div className={styles.loading}>Loading...</div>
     }
 
     if (isError) {
-      return <div>{error.message}</div>
+      return <div className={styles.error}>{error.message}</div>
     }
 
-    if (data && keyword && fuzzyData.length === 0) {
-      return <div>추천 검색어가 없습니다</div>
-    }
+    // if (data && keyword && fuzzyData.length === 0) {
+    //   return <div>추천 검색어가 없습니다</div>
+    // }
 
     return (
       <ul>
@@ -56,9 +57,9 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
         ))}
       </ul>
     )
-  }, [fuzzyData, data, error, isError, isLoading, keywordIndex, keyword])
+  }, [fuzzyData, error, isError, isLoading, keywordIndex, keyword])
 
-  return <div className={styles.keywordListForm}>{Recommends}</div>
+  return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
 }
 
 export default KeywordRecommends
