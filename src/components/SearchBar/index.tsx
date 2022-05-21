@@ -2,15 +2,62 @@ import { ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { searchWord, recommendsCount, setSearchWord, ISearchState } from 'store/slices/searchSlice'
+import { ISearchInputState, searchInput, setSearchInputValue } from 'store/slices/searchInputSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
-import { ISearchInputState, searchInput, setSearchInputValue } from 'store/slices/searchInputSlice'
 
-const SearchBar = ({ onKeyUp }: { onKeyUp: React.KeyboardEventHandler<HTMLInputElement> }) => {
+const SearchBar = ({ keywordIndex, setKeywordIndex }: any) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const inputValue = useSelector(searchInput)
+  const keyword = useSelector(searchWord)
+  const count = useSelector(recommendsCount)
+
+  const handleKeyUp = (e: { key: string }) => {
+    if (e.key === 'Process') {
+      setKeywordIndex(-1)
+      dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: inputValue } as ISearchInputState))
+      return
+    }
+
+    if (keyword === '') return
+
+    if (e.key === 'Backspace') {
+      setKeywordIndex(-1)
+      dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: inputValue } as ISearchInputState))
+      return
+    }
+
+    if (e.key === 'ArrowDown') {
+      if (keywordIndex > count - 2) {
+        setKeywordIndex(0)
+        return
+      }
+
+      setKeywordIndex((prevState: number) => prevState + 1)
+      return
+    }
+
+    if (e.key === 'ArrowUp') {
+      if (keywordIndex <= 0) {
+        setKeywordIndex(count - 1)
+        return
+      }
+
+      setKeywordIndex((prevState: number) => prevState - 1)
+      return
+    }
+
+    if (e.key === 'Escape') {
+      setKeywordIndex(-1)
+      dispatch(setSearchWord({ keyword: '' } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: '' } as ISearchInputState))
+    }
+  }
 
   const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -28,7 +75,7 @@ const SearchBar = ({ onKeyUp }: { onKeyUp: React.KeyboardEventHandler<HTMLInputE
         <MagnifyingGlassIcon />
       </div>
       <input
-        onKeyUp={onKeyUp}
+        onKeyUp={handleKeyUp}
         className={styles.input}
         type='search'
         placeholder='질환명을 입력해주세요.'
