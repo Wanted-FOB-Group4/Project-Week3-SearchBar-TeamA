@@ -7,7 +7,7 @@ import KeywordRecommends from 'components/KeywordRecommends'
 
 import styles from './SearchPage.module.scss'
 import Banner from 'components/Banner'
-import { searchInput } from 'store/slices/searchInputSlice'
+import { ISearchInputState, searchInput, setSearchInputValue } from 'store/slices/searchInputSlice'
 
 const SearchPage = () => {
   const dispatch = useDispatch()
@@ -16,37 +16,47 @@ const SearchPage = () => {
   const count = useSelector(recommendsCount)
   const [keywordIndex, setKeywordIndex] = useState(-1)
 
-  const handleKeyPress = (e: { key: string }) => {
+  const handleKeyUp = (e: { key: string }) => {
     if (e.key === 'Process') {
       setKeywordIndex(-1)
-    }
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Escape') {
       dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: inputValue } as ISearchInputState))
+      return
     }
-    if (keyword !== '') {
-      switch (e.key) {
-        case 'ArrowDown':
-          if (keywordIndex > count - 2) {
-            setKeywordIndex(0)
-            break
-          }
 
-          setKeywordIndex((prevState) => prevState + 1)
-          break
+    if (keyword === '') return
 
-        case 'ArrowUp':
-          if (keywordIndex <= 0) {
-            setKeywordIndex(count - 1)
-            break
-          }
+    if (e.key === 'Backspace') {
+      setKeywordIndex(-1)
+      dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: inputValue } as ISearchInputState))
+      return
+    }
 
-          setKeywordIndex((prevState) => prevState - 1)
-          break
-
-        case 'Escape':
-          setKeywordIndex(-1)
-          break
+    if (e.key === 'ArrowDown') {
+      if (keywordIndex > count - 2) {
+        setKeywordIndex(0)
+        return
       }
+
+      setKeywordIndex((prevState) => prevState + 1)
+      return
+    }
+
+    if (e.key === 'ArrowUp') {
+      if (keywordIndex <= 0) {
+        setKeywordIndex(count - 1)
+        return
+      }
+
+      setKeywordIndex((prevState) => prevState - 1)
+      return
+    }
+
+    if (e.key === 'Escape') {
+      setKeywordIndex(-1)
+      dispatch(setSearchWord({ keyword: '' } as ISearchState))
+      dispatch(setSearchInputValue({ searchInputValue: '' } as ISearchInputState))
     }
   }
 
@@ -57,7 +67,7 @@ const SearchPage = () => {
         <br />
         온라인으로 참여하기
       </h1>
-      <SearchBar onKeyPress={handleKeyPress} />
+      <SearchBar onKeyUp={handleKeyUp} />
       <KeywordRecommends keywordIndex={keywordIndex} />
       <Banner />
     </section>

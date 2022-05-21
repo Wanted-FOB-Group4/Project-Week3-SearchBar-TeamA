@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 import styles from './SearchBar.module.scss'
 import { ISearchInputState, searchInput, setSearchInputValue } from 'store/slices/searchInputSlice'
 
-const SearchBar = ({ onKeyPress }: { onKeyPress: React.KeyboardEventHandler<HTMLInputElement> }) => {
+const SearchBar = ({ onKeyUp }: { onKeyUp: React.KeyboardEventHandler<HTMLInputElement> }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const inputValue = useSelector(searchInput)
@@ -28,7 +28,7 @@ const SearchBar = ({ onKeyPress }: { onKeyPress: React.KeyboardEventHandler<HTML
         <MagnifyingGlassIcon />
       </div>
       <input
-        onKeyUp={onKeyPress}
+        onKeyUp={onKeyUp}
         className={styles.input}
         type='search'
         placeholder='질환명을 입력해주세요.'
