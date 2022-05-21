@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
@@ -22,40 +21,27 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
 
   const { sickNm } = keywordItem
   const regex = createFuzzyMatcher(keyword)
-  const markedKeywordRegex = /(#[A-Za-z0-9가-힣]{1,100}#)/gi
-  const markedKeyword = sickNm
-    .replace(regex, (match, ...groups) => {
-      const letters = groups.slice(0, keyword.length)
-      let lastIndex = 0
-      const highlighted: string[] = []
 
-      letters.forEach((letter) => {
-        const idx = match.indexOf(letter, lastIndex)
-        highlighted.push(match.substring(lastIndex, idx))
-        highlighted.push(`#${letter}#`)
+  const markedKeywordHtml = sickNm.replace(regex, (match, ...groups) => {
+    const letters = groups.slice(0, keyword.length)
+    let lastIndex = 0
+    const highlighted: string[] = []
 
-        lastIndex = idx + 1
-      })
+    letters.forEach((letter) => {
+      const idx = match.indexOf(letter, lastIndex)
+      highlighted.push(match.substring(lastIndex, idx))
+      highlighted.push(`<mark>${letter}</mark>`)
 
-      return highlighted.join('')
+      lastIndex = idx + 1
     })
-    .split(markedKeywordRegex)
+
+    return highlighted.join('')
+  })
 
   const handleKeywordClick = () => {
     dispatch(setSearchWord({ keyword: keywordItem.sickNm } as ISearchState))
     navigate(`/search/${keywordItem.sickNm}`)
   }
-
-  const MarkedKeyword = useMemo(() => {
-    const markedKeywordItem = (value: string, index: number) => {
-      if (value.startsWith('#') && value.endsWith('#')) {
-        return <mark key={`marked_text_${value}_${index}`}>{value.replace(/#/g, '')}</mark>
-      }
-      return <pre key={`text_${value}_${index}`}>{value}</pre>
-    }
-
-    return markedKeyword.map((item, index) => markedKeywordItem(item, index))
-  }, [markedKeyword])
 
   return (
     <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocused })} value={keywordItem.sickNm}>
@@ -63,9 +49,11 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
         <div className={styles.icon}>
           <MagnifyingGlassIcon className={styles.icon} />
         </div>
-        <div className={styles.keywordName} aria-label={keywordItem.sickNm}>
-          {MarkedKeyword}
-        </div>
+        <div
+          className={styles.keywordName}
+          aria-label={keywordItem.sickNm}
+          dangerouslySetInnerHTML={{ __html: markedKeywordHtml }}
+        />
       </button>
     </li>
   )
