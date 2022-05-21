@@ -1,27 +1,29 @@
 @use 'styles/constants/colors';
 @use 'styles/base/fonts';
 
-.header {
+.container {
   display: flex;
-  align-items: initial;
+  flex-direction: column;
   align-items: center;
-  padding-left: 40px;
+  justify-content: center;
 }
 
 .keywordForm {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1000px;
+  flex-direction: column;
+  width: 1400px;
+  background: colors.$WHITE;
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .background {
-  position: absolute;
-  bottom: 0;
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 80vh;
+  width: 100%;
+  margin-top: 50px;
   background: colors.$LIGHTGRAY;
 }
 
