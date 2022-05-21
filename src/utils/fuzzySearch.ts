@@ -50,41 +50,40 @@ export function createFuzzyMatcher(input: string) {
   return new RegExp(patterns, 'i')
 }
 
-export function applyFuzzyMatch(data: IDisease[], keyword: string) {
+export function matchFuzzy(data: IDisease[], keyword: string) {
   if (!keyword) {
     return []
   }
 
   const regex = createFuzzyMatcher(keyword)
   const fuzzyData = data
-    .filter((row) => {
-      return regex.test(row.sickNm)
+    .filter((disease) => {
+      return regex.test(disease.sickNm)
     })
-    .map((row) => {
+    .map((disease) => {
       let longestDistance = 0
 
-      row.sickNm.replace(regex, (match, ...groups) => {
+      disease.sickNm.replace(regex, (match, ...groups) => {
         const letters = groups.slice(0, keyword.length)
         let lastIndex = 0
 
         letters.forEach((letter) => {
-          const idx = match.indexOf(letter, lastIndex)
+          const index = match.indexOf(letter, lastIndex)
           if (lastIndex > 0) {
-            longestDistance = Math.max(longestDistance, idx - lastIndex)
+            longestDistance = Math.max(longestDistance, index - lastIndex)
           }
 
-          lastIndex = idx + 1
+          lastIndex = index + 1
         })
 
         return letters.join('')
       })
 
-      return { ...row, longestDistance }
+      return { ...disease, longestDistance }
     })
-
-  fuzzyData.sort((a, b) => {
-    return a.longestDistance - b.longestDistance
-  })
+    .sort((a, b) => {
+      return a.longestDistance - b.longestDistance
+    })
 
   return fuzzyData.slice(0, 7)
 }
