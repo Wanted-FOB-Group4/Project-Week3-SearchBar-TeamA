@@ -2,12 +2,13 @@ import { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
 
+import { applyFuzzyMatch } from 'utils/fuzzySearch'
 import { getDiseaseData } from 'services/search'
 import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
-import { IDisease } from 'types/search'
+import { IDisease, IFuzzyDisease } from 'types/search'
 import { useQueryDebounce } from 'hooks'
-import KeywordRecommendItem from 'components/KeywordRecommendItem'
 
+import KeywordRecommendItem from 'components/KeywordRecommendItem'
 import styles from './KeywordRecommends.module.scss'
 
 const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
@@ -28,6 +29,8 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     }
   )
 
+  const fuzzyData = applyFuzzyMatch(data || [], keyword)
+
   const Recommends = useMemo(() => {
     if (isLoading) {
       return <div className={styles.list}>Loading...</div>
@@ -37,14 +40,23 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
       return <div>{error.message}</div>
     }
 
+    if (data && keyword && fuzzyData.length === 0) {
+      return <div>추천 검색어가 없습니다</div>
+    }
+
     return (
       <ul>
-        {data?.map((resultData: IDisease, index) => (
-          <KeywordRecommendItem key={resultData.sickCd} resultData={resultData} isFocused={keywordIndex === index} />
+        {fuzzyData.map((keywordItem: IFuzzyDisease, index) => (
+          <KeywordRecommendItem
+            key={keywordItem.sickCd}
+            keyword={keyword}
+            keywordItem={keywordItem}
+            isFocused={keywordIndex === index}
+          />
         ))}
       </ul>
     )
-  }, [data, error, isError, isLoading, keywordIndex])
+  }, [fuzzyData, data, error, isError, isLoading, keywordIndex, keyword])
 
   return <div className={styles.keywordListForm}>{Recommends}</div>
 }

@@ -27,6 +27,12 @@
 }
 
 .keywordName {
+  display: flex;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 13px;
+
+  mark {
+    font-weight: 900;
+    background: transparent;
+  }
 }
