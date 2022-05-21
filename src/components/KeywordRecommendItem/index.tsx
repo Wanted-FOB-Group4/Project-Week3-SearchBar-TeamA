@@ -8,13 +8,13 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
-import { IFuzzyDisease } from 'types/search'
+import { IDisease } from 'types/search'
 
 import styles from './KeywordRecommendItem.module.scss'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
-  keywordItem: IFuzzyDisease
+  keywordItem: IDisease
   isFocused: boolean
 }
 

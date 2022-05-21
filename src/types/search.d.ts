@@ -1,8 +1,6 @@
 export interface IDisease {
   sickCd: string
   sickNm: string
-}
-export interface IFuzzyDisease extends IDisease {
   longestDistance: number
 }
 
