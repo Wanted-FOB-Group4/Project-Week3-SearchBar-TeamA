@@ -17,6 +17,9 @@ const SearchPage = () => {
   const [keywordIndex, setKeywordIndex] = useState(-1)
 
   const handleKeyPress = (e: { key: string }) => {
+    if (e.key === 'Process') {
+      setKeywordIndex(-1)
+    }
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Escape') {
       dispatch(setSearchWord({ keyword: inputValue } as ISearchState))
     }

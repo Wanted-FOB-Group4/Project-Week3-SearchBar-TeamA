@@ -8,6 +8,7 @@ import styles from './KeywordRecommendItem.module.scss'
 import { IFuzzyDisease } from 'types/search'
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
+import { useEffect } from 'react'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
@@ -42,6 +43,10 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
     dispatch(setSearchInputValue({ searchInputValue: keywordItem.sickNm } as ISearchInputState))
     navigate(`/search/${keywordItem.sickNm}`)
   }
+
+  useEffect(() => {
+    isFocused && dispatch(setSearchInputValue({ searchInputValue: keywordItem.sickNm } as ISearchInputState))
+  }, [dispatch, isFocused, keywordItem.sickNm])
 
   return (
     <li className={cx(styles.listKeyword, { [styles.focusKeyword]: isFocused })} value={keywordItem.sickNm}>
