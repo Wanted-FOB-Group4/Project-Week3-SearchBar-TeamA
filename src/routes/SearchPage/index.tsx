@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { searchWord, recommendsCount, setSearchWord, ISearchState } from 'store/slices/searchSlice'
 import SearchBar from 'components/SearchBar'
-import KeywordRecommends from 'components/KeywordRecommends'
+import KeywordRecommends from 'components/KeywordRecommendList'
 
 import styles from './SearchPage.module.scss'
 import Banner from 'components/Banner'

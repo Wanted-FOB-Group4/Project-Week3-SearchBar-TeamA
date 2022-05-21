@@ -1,0 +1,65 @@
+@use 'styles/constants/colors';
+@use 'styles/base/fonts';
+
+.header {
+  display: flex;
+  align-items: initial;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.keywordForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1000px;
+}
+
+.background {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 80vh;
+  background: colors.$LIGHTGRAY;
+}
+
+.resultMessage {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 20px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25%;
+  margin-right: 42px;
+  margin-left: 42px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  text-align: center;
+}
+
+.noClinical {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.registerAlarm {
+  font-size: 18px;
+  line-height: 30px;
+  color: colors.$GRAY;
+}
+
+.alarmBtn {
+  width: fit-content;
+  height: auto;
+  padding: 17px 30px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: colors.$WHITE;
+  background: colors.$BLUE;
+  border-radius: 10px;
+}
