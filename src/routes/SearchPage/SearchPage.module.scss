@@ -1,5 +1,9 @@
 @use 'styles/constants/colors';
 
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
 .section {
   display: flex;
   flex-direction: column;
