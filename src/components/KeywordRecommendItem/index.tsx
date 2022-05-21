@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
 
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
-import styles from './KeywordRecommendItem.module.scss'
-import { IFuzzyDisease } from 'types/search'
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
-import { useEffect } from 'react'
+import { IFuzzyDisease } from 'types/search'
+
+import styles from './KeywordRecommendItem.module.scss'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
@@ -29,11 +30,11 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
     const highlighted: string[] = []
 
     letters.forEach((letter) => {
-      const idx = match.indexOf(letter, lastIndex)
-      highlighted.push(match.substring(lastIndex, idx))
+      const index = match.indexOf(letter, lastIndex)
+      highlighted.push(match.substring(lastIndex, index))
       highlighted.push(`<mark>${letter}</mark>`)
 
-      lastIndex = idx + 1
+      lastIndex = index + 1
     })
 
     return highlighted.join('')
