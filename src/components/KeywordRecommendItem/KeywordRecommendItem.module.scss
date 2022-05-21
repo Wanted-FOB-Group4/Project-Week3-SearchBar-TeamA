@@ -1,4 +1,4 @@
-@import 'styles/constants/colors';
+@use 'styles/constants/colors';
 
 .listKeyword {
   display: flex;
@@ -9,7 +9,7 @@
 }
 
 .focusKeyword {
-  background: $BACKGROUND;
+  background: colors.$BACKGROUND;
 }
 
 .keywordBtn {

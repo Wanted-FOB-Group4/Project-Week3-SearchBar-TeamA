@@ -1,5 +1,4 @@
-@import 'styles/base/fonts';
-@import 'styles/constants/colors';
+@use 'styles/constants/colors';
 
 .section {
   display: flex;
@@ -7,7 +6,7 @@
   align-items: center;
   width: 100%;
   height: 81.5%;
-  background: $BACKGROUND;
+  background: colors.$BACKGROUND;
 }
 
 .description {
