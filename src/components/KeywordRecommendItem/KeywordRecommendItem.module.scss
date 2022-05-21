@@ -1,9 +1,7 @@
 @import 'styles/constants/colors';
 
 .listKeyword {
-  position: relative;
   display: flex;
-  flex-direction: row;
   align-items: center;
   width: 800px;
   height: 33px;
@@ -15,16 +13,11 @@
 }
 
 .keywordBtn {
-  position: relative;
   display: flex;
-  flex-direction: row;
   width: 470px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   text-align: start;
   cursor: pointer;
-  background: $WHITE;
-  border: 0;
-  outline: 0;
 }
 
 .icon {
