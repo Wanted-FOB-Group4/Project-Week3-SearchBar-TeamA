@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, SetStateAction, Dispatch } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,7 +8,12 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './SearchBar.module.scss'
 
-const SearchBar = ({ keywordIndex, setKeywordIndex }: any) => {
+interface ISearchBar {
+  keywordIndex: number
+  setKeywordIndex: Dispatch<SetStateAction<number>>
+}
+
+const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const inputValue = useSelector(searchInput)
