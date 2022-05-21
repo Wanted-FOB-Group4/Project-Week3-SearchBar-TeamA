@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
 import cx from 'classnames'
 
-import { applyFuzzyMatch } from 'utils/fuzzySearch'
+import { matchFuzzy } from 'utils/fuzzySearch'
 import { getDiseaseData } from 'services/search'
 import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
 import { IDisease, IFuzzyDisease } from 'types/search'
@@ -30,7 +30,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     }
   )
 
-  const fuzzyData = applyFuzzyMatch(data || [], keyword)
+  const fuzzyData = matchFuzzy(data || [], keyword)
 
   const Recommends = useMemo(() => {
     if (isLoading) {
