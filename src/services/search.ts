@@ -6,13 +6,14 @@ interface DiseaseListResponse {
   item: IDisease[]
 }
 
-let count = 0
+let apiCallCount = 0
 
 export const getDiseaseData = async (keyword: string) => {
   if (keyword === '') return []
 
-  count += 1
-  console.log('count:', count)
+  apiCallCount += 1
+  // eslint-disable-next-line no-console
+  console.log('API 호출 횟수:', apiCallCount)
 
   const {
     data: { item },

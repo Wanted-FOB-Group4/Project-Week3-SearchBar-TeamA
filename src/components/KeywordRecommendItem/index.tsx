@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
+import parse from 'html-react-parser'
 
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
@@ -55,11 +56,9 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
         <div className={styles.icon}>
           <MagnifyingGlassIcon className={styles.icon} />
         </div>
-        <div
-          className={styles.keywordName}
-          aria-label={keywordItem.sickNm}
-          dangerouslySetInnerHTML={{ __html: markedKeywordHtml }}
-        />
+        <div className={styles.keywordName} aria-label={keywordItem.sickNm}>
+          {parse(markedKeywordHtml)}
+        </div>
       </button>
     </li>
   )

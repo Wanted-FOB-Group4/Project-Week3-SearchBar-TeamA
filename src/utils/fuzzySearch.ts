@@ -81,10 +81,9 @@ export function matchFuzzy(data: IDisease[], keyword: string) {
 
       return { ...disease, longestDistance }
     })
-
-  fuzzyData.sort((a, b) => {
-    return a.longestDistance - b.longestDistance
-  })
+    .sort((a, b) => {
+      return a.longestDistance - b.longestDistance
+    })
 
   return fuzzyData.slice(0, 7)
 }

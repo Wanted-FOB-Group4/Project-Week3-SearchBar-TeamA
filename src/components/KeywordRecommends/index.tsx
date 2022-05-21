@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
 import cx from 'classnames'
@@ -24,18 +24,20 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
       retry: 1,
       staleTime: 60 * 60 * 1000,
       enabled: !!debouncedKeyword,
-      onSuccess: (res) => {
-        dispatch(setRecommendsCount({ recommendsCount: res.length } as ISearchState))
-      },
     }
   )
 
   const fuzzyData = matchFuzzy(data || [], keyword)
 
+  useEffect(() => {
+    dispatch(setRecommendsCount({ recommendsCount: fuzzyData.length } as ISearchState))
+  }, [data, dispatch, fuzzyData])
+
   const Recommends = useMemo(() => {
     if (isLoading) {
       return <div className={styles.loading}>Loading...</div>
     }
+
     if (data && keyword && fuzzyData.length === 0) {
       return <div className={styles.nothing}>추천 검색어가 없습니다</div>
     }
