@@ -1,13 +1,15 @@
 import { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
+import cx from 'classnames'
 
+import { applyFuzzyMatch } from 'utils/fuzzySearch'
 import { getDiseaseData } from 'services/search'
 import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
-import { IDisease } from 'types/search'
+import { IDisease, IFuzzyDisease } from 'types/search'
 import { useQueryDebounce } from 'hooks'
-import KeywordRecommendItem from 'components/KeywordRecommendItem'
 
+import KeywordRecommendItem from 'components/KeywordRecommendItem'
 import styles from './KeywordRecommends.module.scss'
 
 const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
@@ -15,7 +17,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
 
-  const { data, isLoading, isError, error } = useQuery<IDisease[], Error>(
+  const { data, isLoading } = useQuery<IDisease[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
@@ -28,25 +30,31 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     }
   )
 
+  const fuzzyData = applyFuzzyMatch(data || [], keyword)
+
   const Recommends = useMemo(() => {
     if (isLoading) {
-      return <div className={styles.list}>Loading...</div>
+      return <div className={styles.loading}>Loading...</div>
     }
-
-    if (isError) {
-      return <div>{error.message}</div>
+    if (data && keyword && fuzzyData.length === 0) {
+      return <div className={styles.nothing}>추천 검색어가 없습니다</div>
     }
 
     return (
       <ul>
-        {data?.map((resultData: IDisease, index) => (
-          <KeywordRecommendItem key={resultData.sickCd} resultData={resultData} isFocused={keywordIndex === index} />
+        {fuzzyData.map((keywordItem: IFuzzyDisease, index) => (
+          <KeywordRecommendItem
+            key={keywordItem.sickCd}
+            keyword={keyword}
+            keywordItem={keywordItem}
+            isFocused={keywordIndex === index}
+          />
         ))}
       </ul>
     )
-  }, [data, error, isError, isLoading, keywordIndex])
+  }, [isLoading, data, keyword, fuzzyData, keywordIndex])
 
-  return <div className={styles.keywordListForm}>{Recommends}</div>
+  return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
 }
 
 export default KeywordRecommends

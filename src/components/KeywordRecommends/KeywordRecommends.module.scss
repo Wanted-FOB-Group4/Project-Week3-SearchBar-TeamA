@@ -7,32 +7,23 @@
   z-index: levels.$KEYWORDFORM;
   width: 520px;
   min-width: 330px;
-  padding: 10px 20px;
   margin-top: 6px;
   background: colors.$WHITE;
   border-radius: 20px;
+
+  &.active {
+    padding: 10px 20px;
+  }
 
   @media screen and (max-width: 750px) {
     width: 70vw;
   }
 }
 
-.searchKeyword {
-  margin: 18px 0 9px 20px;
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: colors.$GRAY;
-  text-align: start;
+.loading {
+  margin: 10px 20px;
 }
 
-.list {
-  width: 200px;
-  padding: 0;
-  margin: 0 0 13px 20px;
-}
-
-.noResult {
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  font-size: 12px;
+.nothing {
+  margin: 10px 20px;
 }
