@@ -47,7 +47,12 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
     return (
       <ul>
         {fuzzyData.map((keywordItem: IFuzzyDisease, index) => (
-          <KeywordRecommendItem key={keywordItem.sickCd} keywordItem={keywordItem} isFocused={keywordIndex === index} />
+          <KeywordRecommendItem
+            key={keywordItem.sickCd}
+            keyword={keyword}
+            keywordItem={keywordItem}
+            isFocused={keywordIndex === index}
+          />
         ))}
       </ul>
     )

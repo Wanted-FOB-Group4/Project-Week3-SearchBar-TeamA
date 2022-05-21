@@ -63,16 +63,12 @@ export function applyFuzzyMatch(data: IDisease[], keyword: string) {
     .map((row) => {
       let longestDistance = 0
 
-      const disease = row.sickNm.replace(regex, (match, ...groups) => {
+      row.sickNm.replace(regex, (match, ...groups) => {
         const letters = groups.slice(0, keyword.length)
         let lastIndex = 0
-        const highlighted: string[] = []
 
         letters.forEach((letter) => {
           const idx = match.indexOf(letter, lastIndex)
-          highlighted.push(match.substring(lastIndex, idx))
-          highlighted.push(`#${letter}#`)
-
           if (lastIndex > 0) {
             longestDistance = Math.max(longestDistance, idx - lastIndex)
           }
@@ -80,10 +76,10 @@ export function applyFuzzyMatch(data: IDisease[], keyword: string) {
           lastIndex = idx + 1
         })
 
-        return highlighted.join('')
+        return letters.join('')
       })
 
-      return { disease, sickNm: row.sickNm, sickCd: row.sickCd, longestDistance }
+      return { ...row, longestDistance }
     })
 
   fuzzyData.sort((a, b) => {

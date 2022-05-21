@@ -8,18 +8,38 @@ import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
 import { IFuzzyDisease } from 'types/search'
+import { createFuzzyMatcher } from 'utils/fuzzySearch'
 
 interface SearchKeywordRecommendItemProps {
+  keyword: string
   keywordItem: IFuzzyDisease
   isFocused: boolean
 }
 
-const KeywordRecommendItem = ({ keywordItem, isFocused }: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeywordRecommendItemProps) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const { sickNm } = keywordItem
+  const regex = createFuzzyMatcher(keyword)
   const markedKeywordRegex = /(#[A-Za-z0-9가-힣]{1,100}#)/gi
-  const markedKeyword = keywordItem.disease.split(markedKeywordRegex)
+  const markedKeyword = sickNm
+    .replace(regex, (match, ...groups) => {
+      const letters = groups.slice(0, keyword.length)
+      let lastIndex = 0
+      const highlighted: string[] = []
+
+      letters.forEach((letter) => {
+        const idx = match.indexOf(letter, lastIndex)
+        highlighted.push(match.substring(lastIndex, idx))
+        highlighted.push(`#${letter}#`)
+
+        lastIndex = idx + 1
+      })
+
+      return highlighted.join('')
+    })
+    .split(markedKeywordRegex)
 
   const handleKeywordClick = () => {
     dispatch(setSearchWord({ keyword: keywordItem.sickNm } as ISearchState))
