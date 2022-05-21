@@ -1,4 +1,5 @@
 import escapeRegExp from 'lodash.escaperegexp'
+import { IDisease } from 'types/search'
 
 interface ICon2Syl {
   [key: string]: number
@@ -47,4 +48,47 @@ export function createFuzzyMatcher(input: string) {
     .map((pattern) => `(${pattern})`)
     .join('.*?')
   return new RegExp(patterns, 'i')
+}
+
+export function applyFuzzyMatch(data: IDisease[], keyword: string) {
+  if (!keyword) {
+    return []
+  }
+
+  const regex = createFuzzyMatcher(keyword)
+  const fuzzyData = data
+    .filter((row) => {
+      return regex.test(row.sickNm)
+    })
+    .map((row) => {
+      let longestDistance = 0
+
+      const disease = row.sickNm.replace(regex, (match, ...groups) => {
+        const letters = groups.slice(0, keyword.length)
+        let lastIndex = 0
+        const highlighted: string[] = []
+
+        letters.forEach((letter) => {
+          const idx = match.indexOf(letter, lastIndex)
+          highlighted.push(match.substring(lastIndex, idx))
+          highlighted.push(`#${letter}#`)
+
+          if (lastIndex > 0) {
+            longestDistance = Math.max(longestDistance, idx - lastIndex)
+          }
+
+          lastIndex = idx + 1
+        })
+
+        return highlighted.join('')
+      })
+
+      return { disease, sickNm: row.sickNm, sickCd: row.sickCd, longestDistance }
+    })
+
+  fuzzyData.sort((a, b) => {
+    return a.longestDistance - b.longestDistance
+  })
+
+  return fuzzyData.slice(0, 7)
 }
