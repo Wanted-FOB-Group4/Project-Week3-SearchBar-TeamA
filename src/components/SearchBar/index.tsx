@@ -20,6 +20,18 @@ const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
   const keyword = useSelector(searchWord)
   const count = useSelector(recommendsCount)
 
+  const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget
+    dispatch(setSearchInputValue({ searchInputValue: value } as ISearchInputState))
+  }
+
+  const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (inputValue === '') return
+    navigate(`/search/${inputValue}`)
+    dispatch(setSearchWord({ keyword: '' } as ISearchState))
+  }
+
   const handleKeyUp = (e: { key: string }) => {
     if (
       e.key !== 'Backspace' &&
@@ -68,18 +80,6 @@ const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
       dispatch(setSearchWord({ keyword: '' } as ISearchState))
       dispatch(setSearchInputValue({ searchInputValue: '' } as ISearchInputState))
     }
-  }
-
-  const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (inputValue === '') return
-    navigate(`/search/${inputValue}`)
-    dispatch(setSearchWord({ keyword: '' } as ISearchState))
-  }
-
-  const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget
-    dispatch(setSearchInputValue({ searchInputValue: value } as ISearchInputState))
   }
 
   return (
