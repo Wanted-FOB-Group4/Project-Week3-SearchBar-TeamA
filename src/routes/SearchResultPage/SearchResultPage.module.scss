@@ -1,0 +1,66 @@
+@use 'styles/constants/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keywordForm {
+  display: flex;
+  flex-direction: column;
+  width: 1400px;
+  background: colors.$WHITE;
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+  background: colors.$LIGHTGRAY;
+}
+
+.resultMessage {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 20px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25%;
+  margin-right: 42px;
+  margin-left: 42px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  text-align: center;
+}
+
+.noClinical {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.registerAlarm {
+  font-size: 18px;
+  line-height: 30px;
+  color: colors.$GRAY;
+}
+
+.alarmBtn {
+  width: fit-content;
+  height: auto;
+  padding: 17px 30px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: colors.$WHITE;
+  background: colors.$BLUE;
+  border-radius: 10px;
+}
