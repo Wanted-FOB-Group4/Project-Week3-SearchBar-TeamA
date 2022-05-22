@@ -4,6 +4,8 @@
 
 ## Deploy
 
+[배포 주소](https://search-team4a.netlify.app/)
+
 ## Project Tree
 
 ```
@@ -89,6 +91,61 @@
 
 ### 결과 페이지
 
+### 다른 예시 화면들
+
 ## 실행 방법
 
 ## 구현한 방법과 이유, 어려웠던 점
+
+### SearchPage
+
+### SearchResultPage
+
+- 검색이 성공적으로 이루어졌음을 나타내기 위해 부가적으로 검색 결과에 대한 페이지를 만들었습니다. 
+- 입력받은 검색어에 대한 페이지로 동적으로 라우팅됩니다. e.g., `/search/:keyword`
+
+### SearchBar
+
+### KeywordRecommendsList
+
+### KeywordRecommendItem
+
+## Design Reference
+
+https://clinicaltrialskorea.com/
+
+## Tech & Libraries
+
+서버 및 API 통신 관련
+- axios
+- cors
+- express
+- react-query
+
+라우팅
+- react-router-dom
+
+스타일
+- scss
+- css module
+- classnames
+
+중앙 저장소
+- react-redux
+- redux toolkit
+
+코딩 컨벤션
+- eslint
+- prettier
+- stylelint
+
+기타
+- html-react-parser: `dangerouslySetInnerHTML`의 안전한 대체제
+- lodash.escaperegexp: 퍼지 문자열 검색을 위한 정규 표현식
+
+## Contributors
+
+- [김하늘](https://github.com/lazy-sky)
+- [양한별](https://github.com/han-byul-yang)
+- [이근영](https://github.com/Keunyeong) 
+- [이우진](https://github.com/WOOJINLEEdev)
