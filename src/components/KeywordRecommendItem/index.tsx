@@ -5,20 +5,20 @@ import cx from 'classnames'
 import parse from 'html-react-parser'
 
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
-import { IKeywordRecommendItem } from 'types/search'
+import { IDisease } from 'types/search'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
 import { ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
 
-interface SearchKeywordRecommendItemProps {
+interface IKeywordRecommendItem {
   keyword: string
-  keywordItem: IKeywordRecommendItem
+  keywordItem: IDisease
   isFocused: boolean
 }
 
-const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeywordRecommendItemProps) => {
+const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: IKeywordRecommendItem) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

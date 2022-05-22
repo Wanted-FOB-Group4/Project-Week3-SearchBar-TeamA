@@ -1,4 +1,4 @@
-export interface IKeywordRecommendItem {
+export interface IDisease {
   sickCd: string
   sickNm: string
   longestDistance: number

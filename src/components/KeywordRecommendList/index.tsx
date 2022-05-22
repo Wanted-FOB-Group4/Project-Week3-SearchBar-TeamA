@@ -5,7 +5,7 @@ import cx from 'classnames'
 
 import { useQueryDebounce } from 'hooks'
 import { getDiseaseData } from 'services/search'
-import { IKeywordRecommendItem } from 'types/search'
+import { IDisease } from 'types/search'
 import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
 import KeywordRecommendItem from 'components/KeywordRecommendItem'
 
@@ -16,7 +16,7 @@ const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
 
-  const { data, isLoading } = useQuery<IKeywordRecommendItem[], Error>(
+  const { data, isLoading } = useQuery<IDisease[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
@@ -41,7 +41,7 @@ const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
 
     return (
       <ul>
-        {data?.map((keywordItem: IKeywordRecommendItem, index) => (
+        {data?.map((keywordItem: IDisease, index) => (
           <KeywordRecommendItem
             key={keywordItem.sickCd}
             keyword={keyword}
