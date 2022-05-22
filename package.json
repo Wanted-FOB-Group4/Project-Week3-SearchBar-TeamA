@@ -27,14 +27,8 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": {
-    "react-i18next": ">=11.16.4"
-  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
@@ -79,7 +73,6 @@
     "stylelint": "^14.8.1",
     "stylelint-config-recess-order": "^3.0.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "stylelint-declaration-strict-value": "^1.8.0",
-    "typescript": "^4.4.2"
+    "stylelint-declaration-strict-value": "^1.8.0"
   }
 }

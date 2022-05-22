@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
 import parse from 'html-react-parser'
 
-import { MagnifyingGlassIcon } from 'assets/svgs'
-
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
+import { IKeywordRecommendItem } from 'types/search'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
-import { IDisease } from 'types/search'
+import { ISearchState, setSearchWord } from 'store/slices/searchSlice'
+import { MagnifyingGlassIcon } from 'assets/svgs'
 
 import styles from './KeywordRecommendItem.module.scss'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
-  keywordItem: IDisease
+  keywordItem: IKeywordRecommendItem
   isFocused: boolean
 }
 
@@ -44,6 +44,7 @@ const KeywordRecommendItem = ({ keyword, keywordItem, isFocused }: SearchKeyword
   const handleKeywordClick = () => {
     dispatch(setSearchInputValue({ searchInputValue: keywordItem.sickNm } as ISearchInputState))
     navigate(`/search/${keywordItem.sickNm}`)
+    dispatch(setSearchWord({ keyword: '' } as ISearchState))
   }
 
   useEffect(() => {

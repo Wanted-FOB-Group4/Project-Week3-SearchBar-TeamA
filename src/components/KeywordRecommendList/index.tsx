@@ -3,20 +3,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
 import cx from 'classnames'
 
-import { getDiseaseData } from 'services/search'
-import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
-import { IDisease } from 'types/search'
 import { useQueryDebounce } from 'hooks'
-
+import { getDiseaseData } from 'services/search'
+import { IKeywordRecommendItem } from 'types/search'
+import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
 import KeywordRecommendItem from 'components/KeywordRecommendItem'
-import styles from './KeywordRecommends.module.scss'
 
-const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
+import styles from './KeywordRecommendList.module.scss'
+
+const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
   const dispatch = useDispatch()
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
 
-  const { data, isLoading } = useQuery<IDisease[], Error>(
+  const { data, isLoading } = useQuery<IKeywordRecommendItem[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
@@ -40,7 +40,7 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
 
     return (
       <ul>
-        {data?.map((keywordItem: IDisease, index) => (
+        {data?.map((keywordItem: IKeywordRecommendItem, index) => (
           <KeywordRecommendItem
             key={keywordItem.sickCd}
             keyword={keyword}
@@ -55,4 +55,4 @@ const KeywordRecommends = ({ keywordIndex }: { keywordIndex: number }) => {
   return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
 }
 
-export default KeywordRecommends
+export default KeywordRecommendList
