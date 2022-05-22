@@ -94,18 +94,24 @@
 ### 검색
 
 디바운싱이 적용된 상태로 검색어에 따라 추천 검색어 목록을 보여줍니다.
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/79135142/169682528-62d64a4d-3a83-4b69-a0c8-d06865d23a0b.gif)
 
 ### 캐싱
 
 검색 기록이 있는 검색어는 캐싱되어 다시 요청을 보내지 않습니다.
+![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/79135142/169682532-905c13a5-b0cb-4453-8248-697380a5595f.gif)
 
 ### 키 이벤트
 
 검색어를 입력하고 위, 아래 화살표를 누르면 추천 검색어 목록의 각 검색어를 순회합니다.
+![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/79135142/169682558-00296b95-e229-4430-859f-13951b3c985e.gif)
 
 ### 결과 페이지
 
 검색을 실행하면 결과 페이지로 넘어가고 검색 페이지에서도 마찬가지로 검색할 수 있습니다.
+
+![검색동작](https://user-images.githubusercontent.com/79135142/169682343-bdb7a0be-720b-4196-beb2-be69caa2c04b.gif)
+![검색결과창동작확인](https://user-images.githubusercontent.com/79135142/169682352-f223aade-7798-4bf1-8a1a-083bc9f8f850.gif)
 
 ## 구현한 방법과 이유, 어려웠던 점
 
