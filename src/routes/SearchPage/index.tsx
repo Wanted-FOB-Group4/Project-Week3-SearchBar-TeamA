@@ -19,7 +19,7 @@ const SearchPage = () => {
   }, [dispatch])
 
   return (
-    <section className={styles.section}>
+    <div className={styles.container}>
       <h1 className={styles.description}>
         국내 모든 임상시험 검색하고
         <br />
@@ -28,7 +28,7 @@ const SearchPage = () => {
       <SearchBar keywordIndex={keywordIndex} setKeywordIndex={setKeywordIndex} />
       <KeywordRecommends keywordIndex={keywordIndex} />
       <Banner />
-    </section>
+    </div>
   )
 }
 

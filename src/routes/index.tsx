@@ -16,10 +16,12 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <div className={styles.page}>
           <Header />
-          <Routes>
-            <Route path='/' element={<SearchPage />} />
-            <Route path='search/:keyword' element={<SearchResultPage />} />
-          </Routes>
+          <main className={styles.main}>
+            <Routes>
+              <Route path='/' element={<SearchPage />} />
+              <Route path='search/:keyword' element={<SearchResultPage />} />
+            </Routes>
+          </main>
           <Footer />
         </div>
       </QueryClientProvider>
