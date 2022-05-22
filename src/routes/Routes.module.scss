@@ -4,10 +4,12 @@
   min-width: 375px;
   height: 100vh;
   min-height: 570px;
+  overflow: hidden;
 }
 
 .main {
   height: 100vh;
+  min-height: 570px;
   padding-top: 56px;
   padding-bottom: 60px;
 }
