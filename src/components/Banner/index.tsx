@@ -1,4 +1,5 @@
 import { BannerImage } from 'assets/svgs'
+
 import styles from './Banner.module.scss'
 
 const Banner = () => {

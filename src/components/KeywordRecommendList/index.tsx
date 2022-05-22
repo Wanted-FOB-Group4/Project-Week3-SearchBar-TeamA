@@ -4,12 +4,12 @@ import { useQuery } from 'react-query'
 import cx from 'classnames'
 
 import { matchFuzzy } from 'utils/fuzzySearch'
-import { getDiseaseData } from 'services/search'
-import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
-import { IDisease, IFuzzyDisease } from 'types/search'
 import { useQueryDebounce } from 'hooks'
-
+import { getDiseaseData } from 'services/search'
+import { IDisease, IFuzzyDisease } from 'types/search'
+import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
 import KeywordRecommendItem from 'components/KeywordRecommendItem'
+
 import styles from './KeywordRecommendList.module.scss'
 
 const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {

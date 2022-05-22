@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux'
 
 import { setSearchWord, ISearchState } from 'store/slices/searchSlice'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
-
 import SearchBar from 'components/SearchBar'
 import Banner from 'components/Banner'
 import KeywordRecommends from 'components/KeywordRecommendList'
+
 import styles from './SearchPage.module.scss'
 
 const SearchPage = () => {

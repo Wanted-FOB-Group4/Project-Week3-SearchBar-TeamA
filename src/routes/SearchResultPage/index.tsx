@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { ISearchState, setSearchWord } from 'store/slices/searchSlice'
-
 import SearchBar from 'components/SearchBar'
 import KeywordRecommends from 'components/KeywordRecommendList'
+
 import styles from './SearchResultPage.module.scss'
 
 const SearchResultPage = () => {
