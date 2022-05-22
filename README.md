@@ -5,6 +5,10 @@
 ## Deploy
 
 [배포 주소](https://search-team4a.netlify.app/)
+- 깃헙 code의 git url을 복사한다. 
+- 터미널에서 git clone을 받는다.
+- npm install을 한다.
+- npm start를 한다. 
 
 ## Project Tree
 
