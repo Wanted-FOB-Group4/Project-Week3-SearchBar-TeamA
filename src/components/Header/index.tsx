@@ -1,5 +1,7 @@
 import { LogoIcon } from 'assets/svgs'
+
 import { Link } from 'react-router-dom'
+
 import styles from './Header.module.scss'
 
 const Header = () => {
