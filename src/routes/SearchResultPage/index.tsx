@@ -23,8 +23,10 @@ const SearchResultPage = () => {
         <SearchBar keywordIndex={keywordIndex} setKeywordIndex={setKeywordIndex} />
         <KeywordRecommends keywordIndex={keywordIndex} />
       </div>
-      <section className={styles.background}>
-        <div className={styles.resultMessage}>{urlParams.keyword}에 대한 결과입니다</div>
+      <section className={styles.result}>
+        <div className={styles.resultMessage}>
+          <span>{urlParams.keyword}</span>에 대한 결과입니다
+        </div>
       </section>
     </div>
   )
