@@ -72,6 +72,7 @@ const SearchBar = ({ keywordIndex, setKeywordIndex }: ISearchBar) => {
 
   const handleKeywordSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (inputValue === '') return
     navigate(`/search/${inputValue}`)
     dispatch(setSearchWord({ keyword: '' } as ISearchState))
   }
