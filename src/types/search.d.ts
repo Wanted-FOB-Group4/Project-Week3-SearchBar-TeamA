@@ -1,8 +1,6 @@
-export interface IDisease {
+export interface IKeywordRecommendItem {
   sickCd: string
   sickNm: string
-}
-export interface IFuzzyDisease extends IDisease {
   longestDistance: number
 }
 

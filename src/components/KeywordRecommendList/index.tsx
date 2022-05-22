@@ -1,12 +1,11 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from 'react-query'
 import cx from 'classnames'
 
-import { matchFuzzy } from 'utils/fuzzySearch'
 import { useQueryDebounce } from 'hooks'
 import { getDiseaseData } from 'services/search'
-import { IDisease, IFuzzyDisease } from 'types/search'
+import { IKeywordRecommendItem } from 'types/search'
 import { ISearchState, searchWord, setRecommendsCount } from 'store/slices/searchSlice'
 import KeywordRecommendItem from 'components/KeywordRecommendItem'
 
@@ -17,34 +16,31 @@ const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
   const keyword = useSelector(searchWord)
   const debouncedKeyword = useQueryDebounce(keyword, 300)
 
-  const { data, isLoading } = useQuery<IDisease[], Error>(
+  const { data, isLoading } = useQuery<IKeywordRecommendItem[], Error>(
     ['diseaseData', debouncedKeyword],
     () => getDiseaseData(debouncedKeyword),
     {
       retry: 1,
       staleTime: 60 * 60 * 1000,
       enabled: !!debouncedKeyword,
+      onSuccess: (res) => {
+        dispatch(setRecommendsCount({ recommendsCount: res.length } as ISearchState))
+      },
     }
   )
-
-  const fuzzyData = matchFuzzy(data || [], keyword)
-
-  useEffect(() => {
-    dispatch(setRecommendsCount({ recommendsCount: fuzzyData.length } as ISearchState))
-  }, [data, dispatch, fuzzyData])
 
   const Recommends = useMemo(() => {
     if (isLoading) {
       return <div className={styles.loading}>Loading...</div>
     }
 
-    if (data && keyword && fuzzyData.length === 0) {
+    if ((!data || data.length === 0) && keyword) {
       return <div className={styles.nothing}>추천 검색어가 없습니다</div>
     }
 
     return (
       <ul>
-        {fuzzyData.map((keywordItem: IFuzzyDisease, index) => (
+        {data?.map((keywordItem: IKeywordRecommendItem, index) => (
           <KeywordRecommendItem
             key={keywordItem.sickCd}
             keyword={keyword}
@@ -54,9 +50,9 @@ const KeywordRecommendList = ({ keywordIndex }: { keywordIndex: number }) => {
         ))}
       </ul>
     )
-  }, [isLoading, data, keyword, fuzzyData, keywordIndex])
+  }, [isLoading, data, keyword, keywordIndex])
 
-  return <div className={cx(styles.keywordListForm, { [styles.active]: fuzzyData.length !== 0 })}>{Recommends}</div>
+  return <div className={cx(styles.keywordListForm, { [styles.active]: data })}>{Recommends}</div>
 }
 
 export default KeywordRecommendList

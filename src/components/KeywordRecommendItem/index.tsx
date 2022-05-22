@@ -5,7 +5,7 @@ import cx from 'classnames'
 import parse from 'html-react-parser'
 
 import { createFuzzyMatcher } from 'utils/fuzzySearch'
-import { IFuzzyDisease } from 'types/search'
+import { IKeywordRecommendItem } from 'types/search'
 import { ISearchInputState, setSearchInputValue } from 'store/slices/searchInputSlice'
 import { ISearchState, setSearchWord } from 'store/slices/searchSlice'
 import { MagnifyingGlassIcon } from 'assets/svgs'
@@ -14,7 +14,7 @@ import styles from './KeywordRecommendItem.module.scss'
 
 interface SearchKeywordRecommendItemProps {
   keyword: string
-  keywordItem: IFuzzyDisease
+  keywordItem: IKeywordRecommendItem
   isFocused: boolean
 }
 

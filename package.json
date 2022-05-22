@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start:client": "react-scripts start",
+    "start:server": "node server/app.js",
+    "start": "npm-run-all --parallel start:client start:server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -29,6 +31,8 @@
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
     "html-react-parser": "^1.4.12",
     "lodash.escaperegexp": "^4.1.2",
     "react": "^18.1.0",
@@ -60,6 +64,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-testing-library": "^5.3.1",
     "eslint-webpack-plugin": "^3.1.1",
+    "npm-run-all": "^4.1.5",
     "postcss-scss": "^4.0.4",
     "prettier": "^2.6.2",
     "sass": "^1.51.0",
