@@ -6,7 +6,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background: colors.$BACKGROUND;
+  background: colors.$LIGHTGRAY;
 }
 
 .keywordForm {
@@ -14,11 +14,8 @@
   flex-direction: column;
   width: 100%;
   height: 70px;
-  padding: 20px 14vw 0;
+  padding: 10px 14vw;
   background: colors.$WHITE;
-  @media screen and (max-width: 1040px) {
-    padding: 0 20px;
-  }
 }
 
 .result {
